@@ -8,6 +8,8 @@ import { featureLists } from '@data/features';
 import { statsLists } from '@data/stats';
 import Logos from '@components/sections/Logos.astro';
 import { logoLists } from '@data/logos';
+import ToolsSection from '@components/sections/ToolsSection.astro';
+import { tools } from '@data/tools';
 import CtaBanner from '@components/sections/CtaBanner.astro';
 import Faqs from '@components/sections/Faqs.astro';
 import { faqLists } from '@data/faqs';
@@ -16,21 +18,21 @@ import heroImage from '../assets/images/home/default-hero-2.jpg';
 import styleGuideImage from '../assets/images/home/developer.jpg';
 import { HardDrive } from 'lucide-astro';
 
-const seoTitle = "Modern, High-Performance Astro Theme";
-const seoDescription = "A modern, high-performance Astro theme for developer portfolios and documentation sites.";
+const seoTitle = "Cloud Native CISO | Security in a Cloud-Native World";
+const seoDescription = "A real-world journey of building cloud-native security as an aspiring CISO — sharing lessons, strategies, and pitfalls from securing startups.";
 
 const heroContent = {
-    title: 'Security in a Cloud-Native World',
-    description: 'Building cloud-native security, one lesson at a time — for founders, leaders, and builders who move fast and think big. A real-time journey of an aspiring CISO learning what it means to lead cybersecurity in the cloud era and sharing what works (and what doesn\'t).  ',
+    title: 'Building Security in the Cloud-Native Chaos',
+    description: 'I\'m not a guru — I\'m figuring this out as I go. This blog is my open notebook: the wins, the mess-ups, and the real lessons from trying to secure startups with Kubernetes, GitOps, and too little sleep. For fellow builders, leaders, and learners trying to turn cloud-native complexity into clarity.',
     buttons: [
         {
-            text: 'Get Started',
+            text: 'Start Reading',
             link: '/contact',
             target: '_self'
         },
         {
-            text: 'GitHub',
-            link: 'https://github.com/rspisarski/titan-core',
+            text: 'Follow the Journey',
+            link: 'https://github.com/tcpninja/cloud-native-ciso',
             target: '_blank'
         }
     ],
@@ -39,9 +41,9 @@ const heroContent = {
 }
 
 const featuresSection = {
-    eyebrow: "CORE FEATURES",
-    title: "Everything You Need, Nothing You Don't",
-    description: "Titan Core gives you a solid foundation with essential features while staying lightweight and customizable. Start with a clean slate and build exactly what you need without the bloat.",
+    eyebrow: "CORE PRINCIPLES",
+    title: "Security That Makes Sense (and Scales)",
+    description: "I\’m chasing the idea that security can be usable, effective, and not kill velocity. These are the lenses I\'m using to make sense of the chaos.",
     features: featureLists.main.features,
     button: {
         text: "View Theme Info",
@@ -53,10 +55,10 @@ const featuresSection = {
 const FooterCta = {
     eyebrow: "Join The Community",
     title: ' Start Building With Titan Core Today',
-    description: 'Titan Core is open-source and constantly improving. Join our community of developers to contribute, get support, or showcase what you\'ve built.',
+    description: 'Cloud Native CISO is a personal, evolving journey to make modern cybersecurity accessible to fast-moving teams and leaders.',
     hideCta: false,
     button: {
-        text: 'Download Titan Core',
+        text: 'Visit Github Repo',
         link: 'https://github.com/rspisarski/titan-core',
         target: '_blank'
     }
@@ -97,17 +99,21 @@ const sideBySideStats = {
 };
 
 const mainCta = {
-    eyebrow: "Build Blocks",
-    title: "Ready-to-Use Components",
-    description: "Save development time with our pre-built, accessible components. Each one is designed to integrate seamlessly with your projects while maintaining excellent performance.",
+    eyebrow: "The Mission",
+    title: "Learning to Secure Startups - Out Loud",
+    description: "This isn\’t a polished playbook. It\’s a work-in-progress. If you\’ve ever googled 'how to explain Kubernetes security to a CFO' — you\’re in the right place.",
     button: {
-        text: "View All Components",
-        link: "/components",
+        text: "Read the Journey",
+        link: "/blog",
         variant: "primary" as const,
         target: "_self" as const
     }
 };
 
+// const toolsSection = {
+//   eyebrow: "Recommended Cloud Native Security Tools",
+//   tools: tools, // the imported tools array
+// };
 
 const logosSection = {
     eyebrow: "Our Clients",

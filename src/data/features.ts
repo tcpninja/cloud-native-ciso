@@ -21,33 +21,33 @@ export const featureLists: Record<string, FeatureList> = {
         features: [
             {
                 icon: Zap,
-                title: 'Lightning Fast Performance',
-                description: 'Optimized for speed and performance'
+                title: 'Automate Intentionally',
+                description: 'GitOps isn\'t magic. It\'s YAML, duct tape, and discipline. But done right? It\'s a force multiplier'
             },
             {
                 icon: Shield,
-                title: 'SEO Optimized Structure',
-                description: 'Built with SEO best practices in mind'
+                title: 'Policy with Purpose',
+                description: 'Write fewer rules - make them count'
             },
             {
                 icon: TabletSmartphone,
-                title: 'Responsive by Default',
-                description: 'Mobile-friendly out of the box'
+                title: 'Lead Like a CISO (Even if You\'re Not)',
+                description: 'Security is influence. Connect risk to reality.'
             },
             {
                 icon: Smile,
-                title: 'Easy Customization',
-                description: 'Customize the theme to your liking'
+                title: 'Secure the Culture',
+                description: 'Tools change. Culture Scales.'
             },
             {
                 icon: Type,
-                title: 'TypeScript Support',
-                description: 'Built with TypeScript in mind'
+                title: 'Document Like a Developer, Think Like a Leader',
+                description: 'Writing things down isn\'t just for audits. Clarity beat memory and Docs prevent chaos.'
             },
             {
                 icon: CodeXml,
-                title: 'Minimal Dependencies',
-                description: 'Keep your project lightweight'
+                title: 'Don\'t Buy Tools - Build Context',
+                description: 'You can’t outsource understanding. Understand your systems, your threats, and your limits. Strategy beats spend.'
             }
         ]
     },
