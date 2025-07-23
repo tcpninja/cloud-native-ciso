@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import InnerHero from '../sections/InnerHero.astro';
+import Button from '../ui/Button.astro';
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
+
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import playbookHeroImage from '@assets/images/blog-hero-2.jpg'; // Change if you have a specific playbook hero
+
+interface Props {
+  playbooks: CollectionEntry<'playbooks'>[];
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+  title: string;
+  subtitle: string;
+}
+
+const {
+  playbooks,
+  currentPage,
+  totalPages,
+  baseUrl,
+  title,
+  subtitle,
+} = Astro.props;
+
+const nextPage = currentPage < totalPages ? `${baseUrl}/${currentPage + 1}` : null;
+const prevPage =
+  currentPage > 1
+    ? currentPage - 1 === 1
+      ? baseUrl
+      : `${baseUrl}/${currentPage - 1}`
+    : null;
+
+const heroContent = {
+  title: title,
+  description: subtitle,
+  backgroundImage: playbookHeroImage,
+  overlayOpacity: 0.2,
+};
+---
+
+<Layout title={title} description={subtitle}>
+  <main>
+    <InnerHero content={heroContent} />
+
+    <section class="site-container mx-auto px-4 py-12">
+      {playbooks.length === 0 ? (
+        <p>No playbooks found.</p>
+      ) : (
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {playbooks.map((playbook) => (
+            <li class="border rounded-lg p-4 hover:shadow-lg transition-shadow">
+              <a href={`/playbooks/${playbook.data.slug || playbook.id}`} class="block">
+                {playbook.data.image ? (
+                  <Image
+                    src={playbook.data.image}
+                    alt={`Cover for ${playbook.data.title}`}
+                    width={300}
+                    height={200}
+                    class="rounded-md mb-4 object-cover w-full h-48"
+                  />
+                ) : (
+                  <div class="bg-gray-200 rounded-md h-48 flex items-center justify-center mb-4">
+                    <span class="text-gray-500">No Image</span>
+                  </div>
+                )}
+
+                <h2 class="text-xl font-semibold mb-2">{playbook.data.title}</h2>
+                <p class="text-gray-700">{playbook.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+
+    {totalPages > 1 && (
+      <nav class="pagination-nav" aria-label="Playbook pagination" data-aos="fade-in">
+        <div class="container mx-auto px-4 pb-12">
+          <div class="flex items-center justify-center gap-6">
+            {prevPage && (
+              <Button href={prevPage} variant="primary" class="flex items-center gap-2">
+                <ChevronLeft size={20} />
+                Previous
+              </Button>
+            )}
+
+            <div class="flex items-center gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <a
+                  href={pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`}
+                  class={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
+                    currentPage === pageNum
+                      ? 'bg-primary text-white'
+                      : 'hover:bg-white hover:text-body-base'
+                  }`}
+                  aria-current={currentPage === pageNum ? 'page' : undefined}
+                >
+                  {pageNum}
+                </a>
+              ))}
+            </div>
+
+            {nextPage && (
+              <Button href={nextPage} variant="primary" class="flex items-center gap-2">
+                Next
+                <ChevronRight size={20} />
+              </Button>
+            )}
+          </div>
+        </div>
+      </nav>
+    )}
+  </main>
+</Layout>

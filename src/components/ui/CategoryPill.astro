@@ -6,6 +6,6 @@ interface Props {
 const { category } = Astro.props;
 ---
 
-<span class="px-2 py-1 text-sm rounded-sm bg-primary/10 text-primary border-primary border flex items-center justify-center leading-none font-medium">
+<span class="inline-block bg-[var(--color-primary)] text-white text-sm font-medium px-3 py-1 rounded-full transition-colors hover:bg-[var(--color-primary-dark)]">
   {category}
-</span> 
+</span>

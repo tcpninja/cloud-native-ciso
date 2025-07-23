@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import { playbookSetting } from '../../data/config';
+import PaginatedPlaybookLayout from '../../components/playbooks/PaginatedPlaybookLayout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const allPlaybooks = await getCollection('playbooks');
+
+  const filtered = allPlaybooks.filter((p) => {
+    return import.meta.env.DEV || p.data.publish !== false;
+  });
+
+  const sorted = filtered.sort((a, b) => a.data.order - b.data.order);
+
+  const totalPages = Math.ceil(sorted.length / playbookSetting.postsPerPage);
+
+  return Array.from({ length: totalPages - 1 }, (_, i) => {
+    const page = i + 2;
+    const start = (page - 1) * playbookSetting.postsPerPage;
+    const end = start + playbookSetting.postsPerPage;
+
+    return {
+      params: { page: String(page) },
+      props: {
+        page,
+        totalPages,
+        playbooks: sorted.slice(start, end),
+      },
+    };
+  });
+}
+
+const { page, totalPages, playbooks } = Astro.props;
+
+if (page === 1) {
+  return Astro.redirect('/playbooks');
+}
+---
+
+<PaginatedPlaybookLayout
+  playbooks={playbooks}
+  currentPage={page}
+  totalPages={totalPages}
+  baseUrl="/playbooks"
+  title="Cloud Native Playbooks"
+  subtitle="Actionable strategies for modern cloud security"
+/>

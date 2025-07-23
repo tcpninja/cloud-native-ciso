@@ -22,6 +22,10 @@ export const blogSetting = {
   postsPerPage: 6   
 }
 
+export const playbookSetting = {
+  postsPerPage: 6, // or whatever feels right
+};
+
 export const themeSetting = {
-  theme: 'crimsonAura'
+  theme: 'cloudnativeciso-dark'
 }

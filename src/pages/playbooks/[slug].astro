@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import InnerHero from '@components/sections/InnerHero.astro';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const playbooks = await getCollection('playbooks');
+  return playbooks.map((playbook) => ({
+    params: { slug: playbook.data.slug || playbook.id },
+    props: { playbook },
+  }));
+}
+
+const { playbook } = Astro.props;
+const { Content } = await render(playbook);
+
+// Title & Description
+const title = playbook.data.title;
+const description = playbook.data.description;
+
+// Hero image background
+const heroBackground = playbook.data.image?.src || undefined;
+
+const heroContent = {
+  title,
+  description,
+  backgroundImage: heroBackground,
+  overlayOpacity: 0.2
+};
+---
+
+<Layout title={title} description={description}>
+  <InnerHero content={heroContent} />
+
+  <section class="site-container--small mx-auto px-4 pb-16 text-[var(--color-body-dark)] prose prose-lg">
+    {playbook.data.image && (
+      <Image
+        src={playbook.data.image}
+        alt={`Cover image for ${playbook.data.title}`}
+        width={1200}
+        height={600}
+        class="w-full h-auto rounded-md border border-black mb-12"
+        quality={80}
+        format="webp"
+      />
+    )}
+
+    <Content />
+  </section>
+</Layout>
