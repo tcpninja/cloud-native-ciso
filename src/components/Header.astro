@@ -21,9 +21,10 @@ const isCurrentPage = (link: string) => {
 };
 ---
 
-<header class="fixed top-0 z-50 w-full left-0">
+<header class="fixed top-0 z-50 w-full left-0 transition-colors duration-300">
     <div class="site-container mx-auto px-4 mt-4">
-        <div class="flex justify-between items-center bg-white py-4 rounded-lg px-4 border-black border">
+        <!-- <div class="flex justify-between items-center bg-white py-4 rounded-lg px-4 border-black border"> -->
+        <div class="flex justify-between items-center bg-[var(--color-background)] py-4 rounded-lg px-4 border border-[var(--color-nav-submenu-bg)]">
             <Logo />
             <nav class="relative flex items-center gap-2 lg:gap-8" aria-label="Site Navigation">
                 {/* Desktop Menu */}
@@ -99,17 +100,18 @@ const isCurrentPage = (link: string) => {
                     aria-expanded="false"
                 >
                     <span class="menu-icon block">
-                        <Menu size={24} class="text-body-base" />
+                        <Menu size={24} class="text-[var(--color-body-base)]" />
                     </span>
                     <span class="close-icon hidden">
-                        <X size={24} class="text-white" />
+                        <X size={24} class="text-[var(--color-nav-mobile-text)]" />
                     </span>
                 </button>
 
                 {/* Mobile Menu Panel */}
-                <div
+                <!-- <div
                     class="mobile-menu fixed inset-0 z-20 px-8 pt-20 bg-primary lg:hidden hidden opacity-0 scale-95 transform transition-all duration-200 ease-out overflow-y-auto"
-                >
+                > -->
+                <div class="mobile-menu fixed inset-0 z-20 px-8 pt-20 bg-[var(--color-primary)] lg:hidden hidden opacity-0 scale-95 transform transition-all duration-200 ease-out overflow-y-auto">
                     <ul class="flex flex-col gap-4">
                         {
                             headerMenu.map((item) => (

@@ -634,7 +634,57 @@
 
         --color-header-logo: var(--color-primary-light);
         --color-footer-logo: var(--color-primary);
-}
+    }
+
+    [data-theme='cloudnativeciso-dark'] {
+        --color-primary: #6ec1e4; /* Sky Blue - consistent with light mode */
+        --color-primary-light: #a8def1;
+        --color-primary-dark: #3ca1c8;
+
+        --color-secondary: #f9844a; /* Signal Orange for contrast */
+        --color-secondary-light: #fab88b;
+        --color-secondary-dark: #c65f26;
+
+        --color-accent: #00f0ff; /* Neon Cyan - subtle emphasis */
+
+        --color-background: #0e1a2b; /* Charcoal Navy - main bg */
+        --color-background-light: #1e293b; /* Sub-sections */
+        --color-background-dark: #0b1624;
+
+        --color-headline: #f1f5f9; /* Light grayish text */
+        --color-headline-light: #e2e8f0;
+        --color-headline-dark: #ffffff;
+
+        --color-body-base: #cbd5e1; /* Slate Gray Text */
+        --color-body-light: #e2e8f0;
+        --color-body-dark: #f8fafc;
+
+        --color-eyebrow: #6ec1e4;
+        --color-eyebrow-light: #a8def1;
+        --color-eyebrow-dark: #3ca1c8;
+
+        --color-input: var(--color-background-light);
+        --color-input-light: var(--color-background-light);
+        --color-input-dark: var(--color-background-dark);
+        --color-input-text: var(--color-body-light);
+        --color-input-text-light: var(--color-headline-light);
+        --color-input-text-dark: var(--color-headline-dark);
+
+        --color-nav-text: var(--color-body-base);
+        --color-nav-text-hover: var(--color-primary);
+        --color-nav-text-active: var(--color-primary);
+        --color-nav-text-current: var(--color-primary);
+
+        --color-nav-submenu-bg: var(--color-background-light);
+        --color-nav-mobile-text: #ffffff;
+        --color-nav-mobile-text-hover: #f9844a;
+        --color-nav-mobile-text-active: #ffffff;
+        --color-nav-mobile-text-current: #ffffff;
+
+        --color-header-logo: var(--color-primary);
+        --color-footer-logo: var(--color-primary);
+    }
+
 }
 
 @layer components {

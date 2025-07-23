@@ -44,6 +44,20 @@ const team = defineCollection({
         }),
 });
 
+const playbooks = defineCollection({
+    loader: glob({ base: './src/content/playbooks', pattern: '**/*.md' }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string(),
+            image: image().optional(),
+            order: z.number().default(999),
+            publish: z.boolean().default(true),
+            slug: z.string(),
+            link: z.string().optional(), // <-- Add this line if you want a custom link
+        }),
+});
+
 const legal = defineCollection({
     loader: glob({ base: './src/content/legal', pattern: '**/*.md' }),
     schema: z.object({
@@ -58,4 +72,4 @@ const legal = defineCollection({
     }),
 });
 
-export const collections = { blog, team, legal };
+export const collections = { blog, team, legal, playbooks };
