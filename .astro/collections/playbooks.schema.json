@@ -10,6 +10,9 @@
         "description": {
           "type": "string"
         },
+        "slug": {
+          "type": "string"
+        },
         "image": {
           "type": "string"
         },
@@ -17,15 +20,78 @@
           "type": "number",
           "default": 999
         },
+        "publishDate": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
         "publish": {
           "type": "boolean",
           "default": true
         },
-        "slug": {
-          "type": "string"
+        "audience": {
+          "type": "string",
+          "enum": [
+            "founder",
+            "developer",
+            "product-manager",
+            "security-lead"
+          ]
+        },
+        "focus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Beginner",
+            "Intermediate",
+            "Advanced"
+          ]
         },
         "link": {
           "type": "string"
+        },
+        "ctaLabel": {
+          "type": "string"
+        },
+        "ctaLink": {
+          "type": "string"
+        },
+        "seo": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "image": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
         },
         "$schema": {
           "type": "string"

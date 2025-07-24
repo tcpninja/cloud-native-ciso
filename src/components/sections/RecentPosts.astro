@@ -55,12 +55,19 @@ let filteredPosts = allPosts
                 <div class="max-w-2xl mb-12">
                     {content?.eyebrow && <Eyebrow text={content.eyebrow} background={background} />}
                     {content?.title && (
-                        <h2 class:list={[textColor]} data-aos="fade-up">
+                        <h2
+                            class="text-[var(--color-headline)] font-headline text-balance leading-tight"
+                            data-aos="fade-up"
+                        >
                             {content.title}
                         </h2>
                     )}
                     {content?.description && (
-                        <p class:list={['mt-4', textColor, 'opacity-90']} data-aos="fade-up" data-aos-delay="100">
+                        <p
+                            class="mt-4 text-[var(--color-body-base)] text-balance leading-relaxed opacity-90"
+                            data-aos="fade-up"
+                            data-aos-delay="100"
+                        >
                             {content.description}
                         </p>
                     )}
@@ -78,7 +85,7 @@ let filteredPosts = allPosts
         <div class="posts-grid">
             {
                 filteredPosts.map((post, index) => (
-                    <div>
+                    <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-background-light)] p-4 shadow-sm hover:shadow-md transition-shadow duration-200">
                         <BlogPost
                             title={post.data.title}
                             excerpt={post.data.excerpt}

@@ -4,7 +4,7 @@ excerpt: "Learn how to edit posts in Astro"
 featuredImage: "./images/edit-posts.jpg"
 publishDate: "2025-02-22"
 publish: true
-categories: ["Theme Usage"]
+categories: ["Cloud Native Security"]
 
 seo:
   title: "How to edit posts in Astro"

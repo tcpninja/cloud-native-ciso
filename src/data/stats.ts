@@ -24,21 +24,21 @@ export const statsLists: Record<string, StatsList> = {
         id: 'main',
         stats: [
             {
-                value: 10,
-                label: 'Theme Configurations',
+                value: 2,
+                label: 'Security Playbooks Shared',
             },
             {
-                value: 11,
-                label: 'Pre-Built Components',
+                value: 1,
+                label: 'Cloud Native Tools Reviewed',
             },
             {
-                value: 48,
-                label: 'Team Members',
-            },
-            {
-                value: 500000,
-                label: 'Lines of Code',
+                value: 100,
+                label: 'Hours of Real-World Testing',
                 prefix: '+'
+            },
+            {
+                value: 3,
+                label: 'Incident Postmortems Published',
             }
         ]
     },
@@ -46,23 +46,21 @@ export const statsLists: Record<string, StatsList> = {
         id: 'withContent',
         stats: [
             {
-                value: 10,
-                label: 'Color Schemes',
+                value: 1,
+                label: 'Early-Stage Startup Patterns',
             },
             {
-                value: 14.53,
-                label: 'Core Bundle Size',
-                suffix: 'KB'
+                value: 5,
+                label: 'Threat Models Created',
             },
             {
-                value: 11,
-                label: 'Pre-Built Components',
+                value: 3,
+                label: 'Security Playbooks Shared',
             },
             {
-                value: 10,
-                label: 'Build Time',
-                prefix: '<100',
-                suffix: 's'
+                value: 100,
+                label: 'Hours of Real-World Testing',
+                prefix: '+'
             }
         ]
     }

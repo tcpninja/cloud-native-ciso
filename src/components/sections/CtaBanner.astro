@@ -1,5 +1,5 @@
 ---
-import { getBackgroundColor, getTextColor, getPaddingClass, getHeadlineColor, getEyebrowColor } from '@utils/styleUtils';
+import { getBackgroundColor, getTextColor, getPaddingClass, getHeadlineColor} from '@utils/styleUtils';
 import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
 import Button from '@components/ui/Button.astro';
 import Eyebrow from '@components/ui/Eyebrow.astro';
@@ -54,7 +54,7 @@ const containerBgColor = containerBgColors[background as keyof typeof containerB
     ]}>
         <div class:list={[
             "mx-auto",
-            variant === 'contained' ? 'max-w-3xl rounded-xl p-12' : 'max-w-4xl',
+            variant === 'contained' ? 'max-w-3xl rounded-2xl p-10 md:p-14 shadow-md' : 'max-w-4xl',
             variant === 'contained' && containerBgColor
         ]}>
             {eyebrow && (
@@ -65,7 +65,10 @@ const containerBgColor = containerBgColors[background as keyof typeof containerB
             )}
             
             <h2 
-                class:list={[headlineColor]}
+                class:list={[
+                    "text-[var(--color-headline)] font-headline leading-tight text-balance",
+                    "text-2xl sm:text-3xl md:text-4xl",
+                ]}
                 data-aos="fade-up"
             >
                 {title}
@@ -73,7 +76,7 @@ const containerBgColor = containerBgColors[background as keyof typeof containerB
             
             {description && (
                 <p 
-                    class:list={["mt-4", textColor, "opacity-90"]}
+                    class="mt-4 max-w-2xl mx-auto text-[var(--color-body-base)] leading-relaxed opacity-90 text-balance"
                     data-aos="fade-up"
                     data-aos-delay="100"
                 >

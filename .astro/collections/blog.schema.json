@@ -17,22 +17,24 @@
           "type": "string"
         },
         "publish": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "categories": {
           "type": "array",
           "items": {
             "type": "string",
             "enum": [
-              "Tech",
-              "Web Development",
-              "Design",
-              "Accessibility",
-              "Theme Usage",
-              "Astro JS",
-              "SEO"
+              "Startup Security",
+              "Cloud Native Security",
+              "Incident Readiness",
+              "Threat Modeling",
+              "Templates & Playbooks",
+              "Identity & Access",
+              "AI & LLM Security"
             ]
-          }
+          },
+          "default": []
         },
         "seo": {
           "type": "object",
@@ -56,8 +58,7 @@
       "required": [
         "title",
         "excerpt",
-        "publishDate",
-        "categories"
+        "publishDate"
       ],
       "additionalProperties": false
     }

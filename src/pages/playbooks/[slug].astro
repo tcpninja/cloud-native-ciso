@@ -12,6 +12,7 @@ export async function getStaticPaths() {
   }));
 }
 
+
 const { playbook } = Astro.props;
 const { Content } = await render(playbook);
 
@@ -28,9 +29,13 @@ const heroContent = {
   backgroundImage: heroBackground,
   overlayOpacity: 0.2
 };
+
+const seoTitle = playbook.data.seo?.title || title;
+const seoDescription = playbook.data.seo?.description || description;
+const seoImage = playbook.data.seo?.image || heroBackground;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={seoTitle} description={seoDescription} image={seoImage}>
   <InnerHero content={heroContent} />
 
   <section class="site-container--small mx-auto px-4 pb-16 text-[var(--color-body-dark)] prose prose-lg">

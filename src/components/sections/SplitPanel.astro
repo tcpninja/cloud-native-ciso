@@ -62,7 +62,7 @@ const textColor = getTextColor(background);
             {/* Image Side */}
             {
                 imagePosition === 'left' && (
-                    <div class="relative aspect-[4/3] overflow-hidden rounded-[var(--border-radius-base)] border border-black">
+                    <div class="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background-light)] shadow-sm">
                         <Image
                             {src}
                             {alt}
@@ -77,19 +77,30 @@ const textColor = getTextColor(background);
             }
 
             {/* Content Side */}
-            <div class:list={[textColor]}>
+            <div class="text-[var(--color-body-base)]">
                 {eyebrow && <Eyebrow text={eyebrow} background={background} />}
-                <h2 class={textColor} data-aos="fade-up">{headline}</h2>
+                <h2
+                    class="text-[var(--color-headline)] font-headline text-balance leading-tight"
+                    data-aos="fade-up"
+                >
+                    {headline}
+                </h2>
                 {
                     subheadline && (
-                        <h3 class:list={['mt-4 text-h5', textColor]} data-aos="fade-up">
+                        <h3
+                            class="mt-4 text-h5 font-semibold text-[var(--color-body-heading)] leading-snug"
+                            data-aos="fade-up"
+                        >
                             {subheadline}
                         </h3>
                     )
                 }
                 {
                     description && (
-                        <p class:list={['mt-6 text-base opacity-90', textColor]} data-aos="fade-up">
+                        <p
+                            class="mt-6 leading-relaxed text-[var(--color-body-base)] text-balance opacity-90"
+                            data-aos="fade-up"
+                        >
                             {description}
                         </p>
                     )
@@ -116,7 +127,7 @@ const textColor = getTextColor(background);
             {
                 imagePosition === 'right' && (
                     <div
-                        class="relative aspect-[4/3] overflow-hidden rounded-[var(--border-radius-base)] border border-black"
+                        class="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background-light)] shadow-sm"
                         data-aos="fade-up"
                         data-aos-delay="100"
                     >

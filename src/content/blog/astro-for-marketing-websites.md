@@ -4,7 +4,7 @@ excerpt: "Discover why Astro JS is the ideal framework for building high-perform
 featuredImage: "./images/astro-marketing.jpg"
 publishDate: "2025-03-15"
 publish: true
-categories: ["Astro JS", "Web Development"]
+categories: ["Cloud Native Security"]
 
 seo:
   title: "Why Astro JS is Perfect for Marketing Websites"

@@ -52,11 +52,15 @@ const heroContent = {
 
     {totalPages > 1 && (
         <nav class="pagination-nav" aria-label="Blog pagination" data-aos="fade-in">
-            <div class="container mx-auto px-4 py-12">
-                <div class="flex items-center justify-center gap-6">
+            <div class="container mx-auto px-4 py-16">
+                <div class="flex items-center justify-center flex-wrap gap-6 text-sm text-[var(--color-body)]">
                     {prevPage && (
-                        <Button href={prevPage} variant="primary" class="flex items-center gap-2">
-                            <ChevronLeft size={20} />
+                        <Button
+                            href={prevPage}
+                            variant="ghost"
+                            class="flex items-center gap-2 text-sm px-4 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-surface-2)] transition"
+                        >
+                            <ChevronLeft size={18} />
                             Previous
                         </Button>
                     )}
@@ -64,11 +68,10 @@ const heroContent = {
                     <div class="flex items-center gap-2">
                         {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
                             <a
-                                href={pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`}
-                                class={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
+                                class={`w-9 h-9 flex items-center justify-center rounded-full border text-sm transition-all duration-200 ${
                                     currentPage === pageNum
-                                        ? 'bg-primary text-white'
-                                        : 'hover:bg-white hover:text-body-base'
+                                        ? 'bg-primary text-black font-semibold'
+                                        : 'border-[var(--color-border)] text-[var(--color-body-light)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-body)]'
                                 }`}
                                 aria-current={currentPage === pageNum ? 'page' : undefined}
                             >
@@ -78,9 +81,13 @@ const heroContent = {
                     </div>
 
                     {nextPage && (
-                        <Button href={nextPage} variant="primary">
+                        <Button
+                            href={nextPage}
+                            variant="ghost"
+                            class="flex items-center gap-2 text-sm px-4 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-surface-2)] transition"
+                        >
                             Next
-                            <ChevronRight size={20} />
+                            <ChevronRight size={18} />
                         </Button>
                     )}
                 </div>

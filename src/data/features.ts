@@ -55,19 +55,19 @@ export const featureLists: Record<string, FeatureList> = {
         id: 'secondary',
         features: [
             {
-                icon: Heart,
-                title: 'Made with Love',
-                description: 'Crafted with attention to detail'
+            icon: Heart,
+            title: 'Founder-Focused',
+            description: 'Built for the challenges of resource-constrained startups'
             },
             {
-                icon: Coffee,
-                title: 'Always Fresh',
-                description: 'Regular updates and improvements'
+            icon: Coffee,
+            title: 'Signal Over Noise',
+            description: 'No FUD. Just practical, actionable guidance that works'
             },
             {
-                icon: Smile,
-                title: 'User Friendly',
-                description: 'Intuitive and easy to use'
+            icon: Shield,
+            title: 'Principled by Default',
+            description: 'Secure by design. Not security theater.'
             }
         ]
     }

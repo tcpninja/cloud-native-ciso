@@ -46,53 +46,53 @@ const featuresSection = {
     description: "I\’m chasing the idea that security can be usable, effective, and not kill velocity. These are the lenses I\'m using to make sense of the chaos.",
     features: featureLists.main.features,
     button: {
-        text: "View Theme Info",
-        link: "/theme-info",
+        text: "Learn Our Security Philosophy",
+        link: "/philosophy",  // REVIEW: we will create this later
         variant: "primary" as const
     }
 }
 
 const FooterCta = {
     eyebrow: "Join The Community",
-    title: ' Start Building With Titan Core Today',
+    title: 'Join the Cloud Native CISO Community',
     description: 'Cloud Native CISO is a personal, evolving journey to make modern cybersecurity accessible to fast-moving teams and leaders.',
     hideCta: false,
     button: {
         text: 'Visit Github Repo',
-        link: 'https://github.com/rspisarski/titan-core',
+        link: 'https://github.com/tcpninja/cloud-native-ciso', // REVIEW: we will change this to a dedicated GH account for CNC
         target: '_blank'
     }
 }
 
 const styleGuideSection = {
-    eyebrow: "Design System",
-    headline: "Consistent & Beautiful Components",
-    description: "Titan Core comes with a complete style guide to ensure your projects maintain visual consistency. From typography to interactive elements, we've carefully crafted each component.",
+    eyebrow: "The CISO Style",
+    headline: "The Cloud Native CISO Approach",
+    description: "Tactical, iterative, and human-centered. I’m documenting the playbook for security that doesn’t trade agility for safety.",
     image: {
         src: styleGuideImage,
         alt: "Featured image"
     },
     buttons: [
         {
-            text: "Explore Style Guide",
-            link: "/style-guide",
+            text: "Explore the Approach",
+            link: "/approach",
             variant: "primary" as const
         }
     ]
 }
 
 const sideBySideStats = {
-    eyebrow: "Stats",
-    title: "Built for Speed and Flexibility",
-    description: "Titan Core is designed with performance and developer experience in mind. Our lightweight theme gives you all the essentials without the bloat, letting you build exactly what you need with impressive speed.",
+    eyebrow: "",
+    title: "Fast, Lean, and Cloud-Native",
+    description: "Security architecture tailored for lean teams — lightweight, auditable, and built for cloud-native velocity.",
     variant: 'side-by-side' as const,
     stats: statsLists.withContent.stats,
     content: {
-        title: "Built for Speed and Flexibility",
-        description: "Titan Core is designed with performance and developer experience in mind. Our lightweight theme gives you all the essentials without the bloat, letting you build exactly what you need with impressive speed.",
+        title: "Fast, Lean, and Cloud-Native",
+        description: "Security architecture tailored for lean teams — lightweight, auditable, and built for cloud-native velocity.",
         button: {
-            text: "Discover Titan Core",
-            link: "/theme-info",
+            text: "How We Build It",
+            link: "/philosophy",
             variant: "primary" as const
         }
     }
@@ -100,7 +100,7 @@ const sideBySideStats = {
 
 const mainCta = {
     eyebrow: "The Mission",
-    title: "Learning to Secure Startups - Out Loud",
+    title: "Straightforwad Security",
     description: "This isn\’t a polished playbook. It\’s a work-in-progress. If you\’ve ever googled 'how to explain Kubernetes security to a CFO' — you\’re in the right place.",
     button: {
         text: "Read the Journey",
@@ -129,8 +129,8 @@ const faqsSection = {
 
 const recentPostsSection = {
     eyebrow: "LATEST INSIGHTS",
-    title: " Learn From Our Experience",
-    description: "Explore our latest articles on Astro JS development, theme customization tips, and web performance best practices.",
+    title: "Latest From the Field",
+    description: "Lessons learned, patterns observed, and stories from the trenches of startup security.",
     button: {
             text: "View All Posts",
             link: "/blog",

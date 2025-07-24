@@ -2,7 +2,7 @@
 import type { Stat } from '@data/stats';
 import Button from '@components/ui/Button.astro';
 import Eyebrow from '@components/ui/Eyebrow.astro';
-import { getBackgroundColor, getTextColor, getPaddingClass } from '@utils/styleUtils';
+import { getBackgroundColor, getTextColor, getPaddingClass, getHeadlineColor } from '@utils/styleUtils';
 import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
 
 export interface Props {
@@ -47,13 +47,14 @@ const {
 
 const bgColor = getBackgroundColor(background);
 const textColor = getTextColor(background);
+const headlineColor = getHeadlineColor(background);
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 ---
 
 <section class:list={["overflow-hidden", bgColor, paddingClass]}>
     <div class="site-container px-4">
         {variant === 'default' && (title || description) && (
-            <div class="text-center mb-16">
+            <div class="text-center mb-20">
                 {eyebrow && (
                     <Eyebrow 
                         text={eyebrow} 
@@ -61,12 +62,12 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     />
                 )}
                 {title && (
-                    <h2 class:list={[textColor]} data-aos="fade-up">
+                    <h2 class:list={["text-5xl font-light leading-tight", headlineColor]} data-aos="fade-up">
                         {title}
                     </h2>
                 )}
                 {description && (
-                    <p class:list={["mt-4", textColor, "opacity-90"]} data-aos="fade-up" data-aos-delay="100">
+                    <p class:list={["mt-6 text-lg", textColor, "opacity-80"]} data-aos="fade-up" data-aos-delay="150">
                         {description}
                     </p>
                 )}
@@ -84,8 +85,12 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                             background={background} 
                         />
                     )}
-                    <h2 class:list={[textColor]}>{contentContent.title}</h2>
-                    <p class:list={["mt-4", textColor, "opacity-90"]}>{contentContent.description}</p>
+                    <h2 class:list={["text-5xl font-light leading-tight", headlineColor]}>
+                        {contentContent.title}
+                    </h2>
+                    <p class:list={["mt-6 text-lg", textColor, "opacity-80"]}>
+                        {contentContent.description}
+                    </p>
                     {contentContent.button && (
                         <div class="mt-8">
                             <Button
@@ -100,7 +105,9 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
             )}
 
             <div class:list={[
-                variant === 'default' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8' : 'grid grid-cols-2 gap-8',
+                variant === 'default'
+                    ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'
+                    : 'grid grid-cols-2 gap-10',
             ]}>
                 {stats.map((stat, index) => (
                     <div 
@@ -108,12 +115,12 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                         data-aos={variant === 'side-by-side' ? 'fade-left' : 'fade-up'}
                         data-aos-delay={index * 100}
                     >
-                        <div class:list={["text-4xl font-bold mb-2", textColor]}>
+                        <div class:list={["text-5xl font-light mb-2", headlineColor]}>
                             <span class="stat-number" data-target={stat.value}>
                                 {stat.prefix || ''}{0}{stat.suffix || ''}
                             </span>
                         </div>
-                        <p class:list={["text-lg", textColor, "opacity-90"]}>
+                        <p class:list={["text-base", textColor, "opacity-80"]}>
                             {stat.label}
                         </p>
                     </div>

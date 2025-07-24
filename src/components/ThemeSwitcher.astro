@@ -4,7 +4,22 @@ const themes = [
     { id: 'crimsonCipher', label: 'Crimson', desc: 'Fire & Cipher' },   // Cipher with a flare of Red
     { id: 'crimsonAura', label: 'Aura', desc: 'Luxurious and Refined' },   // Cipher with a flare of Luxury
     { id: 'cloudnativeciso-dark', label: 'CISO-dark', desc: 'CISO feel' },   // Branding custom.
-
+    {
+        id: 'pixelgradeElegance',
+        label: 'Elegance',
+        desc: 'Editorial Aesthetic',
+        previewPrimary: '#5e3c58',
+        previewSecondary: '#e9b44c',
+        previewAccent: '#dd6e42'
+    },
+    {
+        id: 'pixelgradeElegance-dark',
+        label: 'Elegance Dark',
+        desc: 'Editorial but Dark',
+        previewPrimary: '#cdb4db',
+        previewSecondary: '#ffafcc',
+        previewAccent: '#bde0fe'
+    },
 ];
 ---
 
@@ -36,9 +51,9 @@ const themes = [
                 aria-label={`Switch to ${theme.label} theme: ${theme.desc}`}
             >
                 <div class="w-6 h-6 rounded-full relative overflow-hidden flex-shrink-0" aria-hidden="true">
-                    <div class="absolute top-0 left-0 right-0 h-1/2" style={`background-color: var(--color-primary)`}></div>
-                    <div class="absolute bottom-0 left-0 w-1/2 h-1/2" style={`background-color: var(--color-secondary)`}></div>
-                    <div class="absolute bottom-0 right-0 w-1/2 h-1/2" style={`background-color: var(--color-accent)`}></div>
+                    <div class="absolute top-0 left-0 right-0 h-1/2" style={`background-color: ${theme.previewPrimary || 'var(--color-primary)'}`}></div>
+                    <div class="absolute bottom-0 left-0 w-1/2 h-1/2" style={`background-color: ${theme.previewSecondary || 'var(--color-secondary)'}`}></div>
+                    <div class="absolute bottom-0 right-0 w-1/2 h-1/2" style={`background-color: ${theme.previewAccent || 'var(--color-accent)'}`}></div>
                 </div>
                 <div class="flex flex-col">
                     <span class="text-sm font-medium">{theme.label}</span>

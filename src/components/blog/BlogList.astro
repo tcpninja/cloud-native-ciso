@@ -22,15 +22,17 @@ const activeCategories = categories.filter((category) =>
 );
 ---
 
-<section class="site-container mx-auto px-4 py-base">
+<section class="site-container mx-auto px-4 py-base text-[var(--color-body)]">
     <div
-        class="mb-16 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6"
+        class="mb-16 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-8"
         data-aos="fade-in"
         data-aos-delay="100"
     >
         <div class="w-full">
-            <h2 class="text-lg font-semibold mb-4">Filter by Categories:</h2>
-            <div class="flex flex-wrap gap-2">
+            <h2 class="text-xl font-semibold tracking-tight text-[var(--color-headline)] mb-4">
+                Filter by Categories:
+            </h2>
+            <div class="flex flex-wrap gap-2 items-center">
                 <a
                     href="/blog"
                     class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${
@@ -45,10 +47,10 @@ const activeCategories = categories.filter((category) =>
                     activeCategories.map((category) => (
                         <a
                             href={`/category/${category.slug}`}
-                            class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${
-                                currentCategory === category.name
-                                    ? 'bg-primary text-body-dark shadow-md'
-                                    : 'bg-background text-body-base hover:bg-background-light hover:text-body-light'
+                            class={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium border transition-all duration-200 ${
+                                !currentCategory
+                                    ? 'bg-primary text-body-dark shadow-sm'
+                                    : 'bg-transparent text-[var(--color-body-light)] border-[var(--color-border)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-body)]'
                             }`}
                             title={category.description}
                         >
@@ -58,14 +60,13 @@ const activeCategories = categories.filter((category) =>
                 }
             </div>
         </div>
-        <p class="text-small text-body-base text-left sm:text-right whitespace-nowrap">
-            Showing <span class="font-bold text-primary">{posts.length}</span> of <span class="font-bold text-primary"
-                >{allPosts.length}</span
-            > posts
+        <p class="text-sm text-[var(--color-body-light)] text-left sm:text-right whitespace-nowrap">
+            Showing <span class="font-semibold text-primary">{posts.length}</span> of
+            <span class="font-semibold text-primary"> {allPosts.length}</span> posts
         </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {
             posts.map((post, index) => (
                 <div>
@@ -83,5 +84,9 @@ const activeCategories = categories.filter((category) =>
         }
     </div>
 
-    {posts.length === 0 && <p class="text-center text-gray-500 py-8">No posts found in this category.</p>}
+    {posts.length === 0 && (
+        <p class="text-center text-[var(--color-body-light)] py-8 italic">
+            No posts found in this category.
+        </p>
+    )}
 </section>

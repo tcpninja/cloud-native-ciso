@@ -16,7 +16,7 @@ const { content } = Astro.props;
 const opacity = content.overlayOpacity ?? 1;
 ---
 
-<section class="w-full border-b pt-38 pb-18 relative">
+<section class="w-full border-b border-[var(--color-border)] pt-38 pb-18 relative bg-[var(--color-background-dark)] text-[var(--color-headline)]">
     <div class="absolute inset-0 left-0 top-0 w-full h-full overflow-hidden">
             {content.backgroundImage && (
                 <Image
@@ -30,15 +30,32 @@ const opacity = content.overlayOpacity ?? 1;
                 />
             )}
             <div
-                class="hero-background absolute inset-0 left-0 top-0 w-full h-full overflow-hidden"
+                class="absolute inset-0 left-0 top-0 w-full h-full bg-[var(--color-background-dark)] mix-blend-multiply backdrop-blur-sm"
                 style={`opacity: ${opacity};`}
             ></div>
         </div>
 
     <div class="site-container mx-auto px-4 relative z-10">
         <div>
-            <h1 class="text-white" data-aos="fade-up">{content.title}</h1>
-            {content.description && <p class="subtitle text-white" data-aos="fade-up" data-aos-delay="100">{content.description}</p>}
+            <!-- <h1 class="text-white" data-aos="fade-up">{content.title}</h1>
+            {content.description && <p class="subtitle text-white" data-aos="fade-up" data-aos-delay="100">{content.description}</p>} -->
+            <h1 
+                class="font-headline text-[var(--color-headline)] leading-tight mb-2 drop-shadow-sm"
+                style="font-size: var(--text-4xl);" 
+                data-aos="fade-up"
+            >
+                {content.title}
+            </h1>
+            {content.description && (
+                <p 
+                    class="subtitle text-[var(--color-body-base)] max-w-2xl leading-relaxed"
+                    style="font-size: var(--text-lg);" 
+                    data-aos="fade-up" 
+                    data-aos-delay="100"
+                >
+                    {content.description}
+                </p>
+            )}            
         </div>
     </div>
 </section>

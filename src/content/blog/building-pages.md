@@ -4,7 +4,7 @@ excerpt: "Learn how to build pages with Titan Core components"
 featuredImage: "./images/building-pages.jpg"
 publishDate: "2025-02-22"
 publish: true
-categories: ["Theme Usage"]
+categories: ["Cloud Native Security"]
 
 seo:
   title: "How to build pages with Titan Core components"

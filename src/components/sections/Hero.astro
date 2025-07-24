@@ -23,7 +23,7 @@ const { content } = Astro.props;
 const opacity = content.overlayOpacity ?? 0.7;
 ---
 
-<section class="header-offset relative text-[var(--color-headline-dark)] bg-[var(--color-background-dark)]">
+<section class="header-offset relative text-[var(--color-headline)] bg-[var(--color-background-dark)] border-b border-[var(--color-border)]">
     {content.backgroundImage && (
         <div class="absolute inset-0 left-0 top-0 w-full h-full overflow-hidden z-0">
             <Image
@@ -37,8 +37,7 @@ const opacity = content.overlayOpacity ?? 0.7;
                 loading="eager"
                 decoding="async"
             />
-            <div
-                class="absolute inset-0 bg-[var(--color-background-dark)] mix-blend-multiply"
+            <div class="absolute inset-0 bg-[var(--color-background-dark)] mix-blend-multiply backdrop-blur-sm"
                 style={`opacity: ${opacity};`}
             ></div>
         </div>
@@ -46,7 +45,7 @@ const opacity = content.overlayOpacity ?? 0.7;
 
     <div class="site-container mx-auto px-4 py-large relative z-10 flex flex-col md:items-center md:justify-center md:text-center">
         <h1 
-            class="text-[var(--color-headline-dark)] text-balance font-headline leading-tight mb-4"
+            class="text-[var(--color-headline)] text-balance font-headline leading-tight mb-4 drop-shadow-sm"
             style="font-size: var(--text-h1);"
             data-aos="fade-up"
         >
@@ -54,7 +53,7 @@ const opacity = content.overlayOpacity ?? 0.7;
         </h1>
         
         <p 
-            class="text-[var(--color-body-dark)] text-balance leading-relaxed max-w-2xl mx-auto"
+            class="text-[var(--color-body-base)] text-balance leading-relaxed max-w-2xl mx-auto text-lg"
             style="font-size: var(--text-base);"
             data-aos="fade-up" 
             data-aos-delay="100"

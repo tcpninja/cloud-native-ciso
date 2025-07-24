@@ -6,41 +6,40 @@ interface Category {
 
 export const categories: Category[] = [
   {
-    name: 'Tech',
-    slug: 'tech',
-    description: 'Latest in technology and software development'
+    name: 'Startup Security',
+    slug: 'startup-security',
+    description: 'Security strategies and foundations for early-stage startups'
   },
   {
-    name: 'Web Development',
-    slug: 'web-development',
-    description: 'Tips and insights for better web development'
+    name: 'Cloud Native Security',
+    slug: 'cloud-native-security',
+    description: 'Securing Kubernetes, containers, serverless, and cloud infra'
   },
   {
-    name: 'Design',
-    slug: 'design',
-    description: 'Exploring design and user experience'
+    name: 'Incident Readiness',
+    slug: 'incident-readiness',
+    description: 'How to prepare for, detect, and respond to incidents'
   },
   {
-    name: 'Accessibility',
-    slug: 'accessibility',
-    description: 'Exploring accessibility and user experience'
+    name: 'Threat Modeling',
+    slug: 'threat-modeling',
+    description: 'Simple and fast ways to reason about risk and system design'
   },
   {
-    name: 'Theme Usage',
-    slug: 'theme-usage',
-    description: 'Learn how to use the theme'
+    name: 'Templates & Playbooks',
+    slug: 'templates-playbooks',
+    description: 'Copy-paste-ready resources to move fast and securely'
   },
   {
-    name: 'Astro JS',
-    slug: 'astro-js',
-    description: 'Everything about Astro JS framework and development'
+    name: 'Identity & Access',
+    slug: 'identity-access',
+    description: 'Managing identity, permissions, and Zero Trust in practice'
   },
   {
-    name: 'SEO',
-    slug: 'seo',
-    description: 'Search engine optimization strategies and best practices'
-  },
-  
+    name: 'AI & LLM Security',
+    slug: 'ai-llm-security',
+    description: 'Securing apps built with or exposed to AI/LLMs'
+  }
 ];
 
 // Helper function to get category by slug

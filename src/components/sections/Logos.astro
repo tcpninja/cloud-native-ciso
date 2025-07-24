@@ -2,7 +2,7 @@
 import type { Logo } from '@data/logos';
 import Eyebrow from '@components/ui/Eyebrow.astro';
 import { Image } from 'astro:assets';
-import { getPaddingClass, getBackgroundColor } from '@utils/styleUtils';
+import { getPaddingClass, getBackgroundColor, getTextColor } from '@utils/styleUtils';
 import type { PaddingSize, ThemeColor } from '@utils/styleUtils';
 
 export interface Props {
@@ -29,29 +29,44 @@ const paddingClass = getPaddingClass({
     paddingTop: Astro.props.paddingTop,
     paddingBottom: Astro.props.paddingBottom 
 });
-
+const textColor = getTextColor(background);
 ---
 
 <section class:list={["relative", bgColor, paddingClass]}>
     <div class="site-container px-4 text-center">
-        {eyebrow && (
-            <Eyebrow 
-                text={eyebrow} 
-                background={background} 
-                className="text-center"
-            />
-        )}
-        <div class="flex flex-wrap justify-center gap-16">
+        <div class="max-w-3xl mx-auto mb-12">
+            {eyebrow && (
+                <Eyebrow 
+                    text={eyebrow} 
+                    background={background} 
+                    className="text-center"
+                />
+            )}
+
+            {headline && (
+                <h2 class="text-[var(--color-headline)] font-headline text-2xl sm:text-3xl md:text-4xl leading-tight text-balance mb-2" data-aos="fade-up">
+                    {headline}
+                </h2>
+            )}
+
+            {subheadline && (
+                <p class:list={["mt-2", textColor, "opacity-90", "text-balance"]} data-aos="fade-up" data-aos-delay="100">
+                    {subheadline}
+                </p>
+            )}
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-x-12 gap-y-10 items-center max-w-6xl mx-auto">
             {logos.map((logo, index) => (
                 <div 
                     class="logo-wrapper flex justify-center items-center w-32 h-20"
                     data-aos="fade-up"
-                    data-aos-delay={index * 100}
+                    data-aos-delay={index * 75}
                 >
                     <Image 
                         src={logo.src} 
                         alt={logo.alt}
-                        class="h-8 md:h-10 w-auto transition-all duration-300 object-contain object-center filter grayscale hover:grayscale-0 opacity-75 hover:opacity-100"
+                        class="h-8 md:h-10 w-auto object-contain filter grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 ease-in-out"
                         width={200}
                         height={80}
                     />

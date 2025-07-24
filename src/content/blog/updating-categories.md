@@ -4,7 +4,7 @@ excerpt: "Learn how to add/remove categories"
 featuredImage: "./images/update-categories.jpg"
 publishDate: "2025-02-22"
 publish: true
-categories: ["Theme Usage"]
+categories: ["Cloud Native Security"]
 
 seo:
   title: "How to add/remove categories"

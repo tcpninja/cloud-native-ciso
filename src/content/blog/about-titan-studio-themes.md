@@ -4,7 +4,7 @@ excerpt: "Learn about Titan Studio Themes and our mission to create beautiful, f
 featuredImage: "./images/titan-studio-themes.jpg"
 publishDate: "2023-11-15"
 publish: true
-categories: ["Web Development", "Theme Usage"]
+categories: ["Startup Security"]
 
 seo:
   title: "Introducing Titan Studio Themes - Premium Astro JS Themes"

@@ -1,4 +1,5 @@
 ---
+// Imports
 import Layout from '../../layouts/Layout.astro';
 import InnerHero from '../sections/InnerHero.astro';
 import Button from '../ui/Button.astro';
@@ -6,7 +7,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-astro';
 
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import playbookHeroImage from '@assets/images/blog-hero-2.jpg'; // Change if you have a specific playbook hero
+import playbookHeroImage from '@assets/images/blog-hero-2.jpg';
 
 interface Props {
   playbooks: CollectionEntry<'playbooks'>[];
@@ -35,7 +36,7 @@ const prevPage =
     : null;
 
 const heroContent = {
-  title: title,
+  title,
   description: subtitle,
   backgroundImage: playbookHeroImage,
   overlayOpacity: 0.2,
@@ -46,30 +47,32 @@ const heroContent = {
   <main>
     <InnerHero content={heroContent} />
 
-    <section class="site-container mx-auto px-4 py-12">
+    <section class="site-container px-4 py-16">
       {playbooks.length === 0 ? (
-        <p>No playbooks found.</p>
+        <p class="text-body-light">No playbooks found.</p>
       ) : (
-        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" data-aos="fade-up">
           {playbooks.map((playbook) => (
-            <li class="border rounded-lg p-4 hover:shadow-lg transition-shadow">
-              <a href={`/playbooks/${playbook.data.slug || playbook.id}`} class="block">
+            <li class="border border-border-light rounded-xl p-5 bg-white/5 hover:shadow-md transition-shadow">
+              <a href={`/playbooks/${playbook.data.slug || playbook.id}`} class="block group">
                 {playbook.data.image ? (
                   <Image
                     src={playbook.data.image}
                     alt={`Cover for ${playbook.data.title}`}
                     width={300}
                     height={200}
-                    class="rounded-md mb-4 object-cover w-full h-48"
+                    class="rounded-md mb-4 object-cover w-full h-48 transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 ) : (
-                  <div class="bg-gray-200 rounded-md h-48 flex items-center justify-center mb-4">
-                    <span class="text-gray-500">No Image</span>
+                  <div class="bg-surface-light rounded-md h-48 flex items-center justify-center mb-4">
+                    <span class="text-body-muted text-sm">No Image</span>
                   </div>
                 )}
 
-                <h2 class="text-xl font-semibold mb-2">{playbook.data.title}</h2>
-                <p class="text-gray-700">{playbook.data.description}</p>
+                <h2 class="text-lg font-semibold mb-2 text-heading group-hover:text-primary transition-colors">
+                  {playbook.data.title}
+                </h2>
+                <p class="text-body-light text-sm">{playbook.data.description}</p>
               </a>
             </li>
           ))}
@@ -79,10 +82,10 @@ const heroContent = {
 
     {totalPages > 1 && (
       <nav class="pagination-nav" aria-label="Playbook pagination" data-aos="fade-in">
-        <div class="container mx-auto px-4 pb-12">
-          <div class="flex items-center justify-center gap-6">
+        <div class="site-container px-4 pb-16">
+          <div class="flex items-center justify-center gap-4 flex-wrap">
             {prevPage && (
-              <Button href={prevPage} variant="primary" class="flex items-center gap-2">
+              <Button href={prevPage} variant="ghostSolid" class="flex items-center gap-2">
                 <ChevronLeft size={20} />
                 Previous
               </Button>
@@ -90,22 +93,26 @@ const heroContent = {
 
             <div class="flex items-center gap-2">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                <a
-                  href={pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`}
-                  class={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
-                    currentPage === pageNum
-                      ? 'bg-primary text-white'
-                      : 'hover:bg-white hover:text-body-base'
-                  }`}
-                  aria-current={currentPage === pageNum ? 'page' : undefined}
-                >
-                  {pageNum}
-                </a>
+                pageNum === currentPage ? (
+                  <span
+                    aria-current="page"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-medium"
+                  >
+                    {pageNum}
+                  </span>
+                ) : (
+                  <a
+                    href={pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`}
+                    class="w-10 h-10 flex items-center justify-center rounded-full text-sm text-body-base hover:bg-white hover:text-primary transition-colors"
+                  >
+                    {pageNum}
+                  </a>
+                )
               ))}
             </div>
 
             {nextPage && (
-              <Button href={nextPage} variant="primary" class="flex items-center gap-2">
+              <Button href={nextPage} variant="ghostSolid" class="flex items-center gap-2">
                 Next
                 <ChevronRight size={20} />
               </Button>

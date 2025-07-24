@@ -37,33 +37,31 @@ const textColor = getTextColor(background);
 <section class:list={["relative", bgColor, paddingClass]}>
     <div class="site-container px-4">
         {(title || description) && (
-            <div class="max-w-3xl mx-auto text-center mb-12">
+            <div class="max-w-3xl mx-auto text-center mb-16">
                 {eyebrow && (
                     <Eyebrow 
                         text={eyebrow} 
                         background={background} 
                     />
                 )}
-                {title && <h2 data-aos="fade-up" class:list={["text-3xl font-bold mb-4", headlineColor]}>{title}</h2>}
-                {description && <p data-aos="fade-up" class:list={["text-lg", textColor]}>{description}</p>}
+                {title && <h2 data-aos="fade-up" class:list={["text-4xl font-light leading-tight mb-6", headlineColor]}>{title}</h2>}
+                {description && <p data-aos="fade-up" class:list={["text-lg", textColor, "opacity-80"]}>{description}</p>}
             </div>
         )}
         
-        <div class="max-w-3xl mx-auto">
-            <div class="divide-y divide-gray-200">
-                {faqs.map(({ question, answer }, index) => (
-                  <Details
-                    class="py-6"
-                    data-aos="fade-up"
-                    data-aos-delay={index * 100}
-                  >
-                      <span slot="heading" class="pr-8 text-xl font-semibold" class:list={[headlineColor]}>{question}</span>
-                      <div class="overflow-hidden">
-                          <div class:list={["pt-4 pr-8 text-small", textColor]}>{answer}</div>
-                      </div>
-                  </Details>
-                ))}
-            </div>
+        <div class="max-w-3xl mx-auto divide-y divide-white/10">
+            {faqs.map(({ question, answer }, index) => (
+              <Details
+                class="py-6"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+              >
+                  <span slot="heading" class:list={["pr-8 text-xl font-semibold", headlineColor]}>{question}</span>
+                  <div class="overflow-hidden">
+                      <div class:list={["pt-4 pr-8 text-base leading-relaxed", textColor, "opacity-80"]}>{answer}</div>
+                  </div>
+              </Details>
+            ))}
         </div>
     </div>
 </section>

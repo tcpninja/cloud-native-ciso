@@ -80,26 +80,30 @@ const paddingClass = getPaddingClass({
             {features.map((feature, index) => (
                 <div 
                     class:list={[
-                        "p-6 rounded-lg border border-black",
-                        background === 'dark' ? 'bg-background-base/10' : 'bg-background/90',
-                        "flex flex-col"
+                        "p-6 rounded-2xl border transition-all duration-300",
+                        "border-[var(--color-border)]",
+                        "bg-[var(--color-background-light)]",
+                        "hover:border-[var(--color-primary)] hover:shadow-md",
+                        "flex flex-col backdrop-blur-sm"
                     ]}
                     data-aos="fade-up"
                     data-aos-delay={index * 100}
                 >
                     <div class:list={[
-                        "w-12 h-12 flex items-center justify-center rounded-lg mb-4",
-                        "bg-primary"
+                        "w-12 h-12 flex items-center justify-center rounded-xl mb-4 shadow-sm",
+                        "bg-[var(--color-secondary)]"
                     ]}>
                         <feature.icon
                             size={24}
                             class="text-white"
                         />
                     </div>
-                    <h3 class:list={["text-h4 mb-2", textColor]}>
+                    <h3 class:list={[
+                        "text-[var(--color-headline)] font-headline leading-tight mb-2"
+                    ]}>
                         {feature.title}
                     </h3>
-                    <p class:list={["text-base", textColor, "opacity-90"]}>
+                     <p class="text-[var(--color-body-base)] text-base leading-relaxed opacity-90">
                         {feature.description}
                     </p>
                 </div>

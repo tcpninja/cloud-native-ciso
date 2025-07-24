@@ -6,6 +6,8 @@ interface Props {
 const { category } = Astro.props;
 ---
 
-<span class="text-sm text-gray-700 font-medium group-hover:text-primary transition-colors duration-300 mr-2">
+<span class="text-xs sm:text-sm font-medium text-body-muted hover:text-primary transition-colors duration-200 mr-2">
   #{category.toLowerCase().replace(/\s+/g, '')}
-</span> 
+</span>
+
+<!-- REVIEW: Improve the Hashtag prefix to include icons -->

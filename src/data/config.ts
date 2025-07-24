@@ -8,14 +8,14 @@ export const siteConfig = {
       LinkedIn: 'https://www.linkedin.com/company/astrodotbuild',
       Email: 'support@titan-core.com',
       Phone: '+123 456 7890',
-      Location: '123 Main St, Anytown, USA',
+      Location: '123 Main St, Anytown, USA',  // REVIEW: Update these values to your socials when you are ready
   }
 };
 
 export const SEO = {
   Separator: '|',
   SiteName: 'Cloud Native CISO',
-  defaultDescription: 'Brief Description of Cloud Native CISO',
+  defaultDescription: 'Practical, cloud-native cybersecurity insights for startups and small teams — without the enterprise bloat.',
 };
   
 export const blogSetting = {
