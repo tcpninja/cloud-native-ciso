@@ -1,0 +1,91 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import CategoryPill from '@components/ui/CategoryPill.astro';
+import Date from '@components/ui/Date.astro';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const playbooks = await getCollection('playbook');
+  return playbooks.map((playbook) => ({
+    params: { slug: playbook.data.slug || playbook.id },
+    props: { playbook },
+  }));
+}
+
+const { playbook } = Astro.props;
+const { Content } = await render(playbook);
+
+// Metadata
+const title = playbook.data.title;
+const description = playbook.data.description;
+
+// SEO title and description fallback logic
+const seoTitle = playbook.data.seo?.title || title;
+const seoDescription = playbook.data.seo?.description || description;
+
+// Featured image (for visual and SEO purposes)
+let seoImage: string | undefined = playbook.data.seo?.image || playbook.data.featuredImage?.src;
+
+if (seoImage && !seoImage.startsWith('http')) {
+  const siteUrl = import.meta.env.SITE || 'https://cloudnativeciso.com';
+  seoImage = new URL(seoImage.startsWith('/') ? seoImage : `/${seoImage}`, siteUrl).toString();
+}
+---
+
+<Layout title={seoTitle} description={seoDescription} image={seoImage}>
+  <!-- Hero Background Image (tinted & blurred) -->
+  <div class="w-full h-120 absolute top-0 left-0 z-0 overflow-hidden border-b border-black">
+    {playbook.data.featuredImage && (
+      <>
+        <Image
+          src={playbook.data.featuredImage}
+          alt=""
+          width={1920}
+          height={1080}
+          class="w-full h-full object-cover grayscale opacity-30"
+          quality={60}
+        />
+        <div class="absolute inset-0 bg-primary/10 backdrop-blur-md" />
+      </>
+    )}
+  </div>
+
+  <!-- Main Playbook Article -->
+  <article class="site-container--small mx-auto px-4 pb-base prose prose-lg prose-invert text-[var(--color-body-light)] relative z-10">
+    <!-- Title + Metadata -->
+    <div class="mt-42 mb-16 text-center">
+      <h1 class="text-4xl font-bold leading-tight tracking-tight">{title}</h1>
+      <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mt-4">
+        <Date date={playbook.data.publishDate} />
+        {playbook.data.tags && (
+          <div class="flex flex-wrap gap-2">
+            {playbook.data.tags.map((tags) => (
+              <CategoryPill category={tags} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Featured Image -->
+    {playbook.data.featuredImage && (
+      <Image
+        src={playbook.data.featuredImage}
+        alt=""
+        width={1200}
+        height={675}
+        class="w-full h-auto rounded-xl shadow-lg border border-[var(--color-border)] mb-12"
+        quality={80}
+        format="webp"
+      />
+    )}
+
+    <!-- Playbook Content -->
+    <div class="mt-8">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<!-- REVIEW: Update this to use tags instead of categories -->

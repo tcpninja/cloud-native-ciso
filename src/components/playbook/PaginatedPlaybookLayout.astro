@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import InnerHero from '../sections/InnerHero.astro';
+import PlaybookList from './PlaybookList.astro';
+import Button from '../ui/Button.astro';
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import playbookHeroImage from '@assets/images/blog-hero-2.jpg';
+
+const title = "Playbooks";
+const seoTitle = `${title}`;
+const seoDescription = "Battle-tested guides for securing cloud-native startups. Our playbooks deliver practical, actionable security strategies without enterprise bloat—built for modern builders navigating risk at startup speed.";
+
+interface Props {
+  playbook: CollectionEntry<'playbook'>[];
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+  title: string;
+  subtitle: string;
+  tags?: string;
+}
+
+const {
+  playbook,
+  currentPage,
+  totalPages,
+  baseUrl,
+  title: pageTitle,
+  subtitle,
+  tags
+} = Astro.props;
+
+const nextPage = currentPage < totalPages ? `${baseUrl}/${currentPage + 1}` : null;
+const prevPage = currentPage > 1
+  ? currentPage - 1 === 1
+    ? baseUrl
+    : `${baseUrl}/${currentPage - 1}`
+  : null;
+
+const heroContent = {
+  title: pageTitle,
+  description: subtitle,
+  backgroundImage: playbookHeroImage,
+  overlayOpacity: 0.2,
+};
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <main>
+    <InnerHero content={heroContent} />
+    <section class="site-container px-4 py-16">
+      {playbook.length === 0 ? (
+        <p class="text-[var(--color-body-muted)]">No playbooks found.</p>
+      ) : (
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" data-aos="fade-up">
+          {playbook.map((playbook) => (
+            <li class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md transition-all duration-300 motion-safe:hover:shadow-xl">
+              <a href={`/playbook/${playbook.data.slug || playbook.id}`} class="group block h-full overflow-hidden">
+                {playbook.data.image ? (
+                  <div class="relative aspect-[16/9] overflow-hidden border-b border-[var(--color-border)] transition-colors duration-300 group-hover:border-primary">
+                    <Image
+                      src={playbook.data.image}
+                      alt={`Cover for ${playbook.data.title}`}
+                      width={600}
+                      height={338}
+                      class="object-cover w-full h-full grayscale transition-all duration-300 motion-safe:group-hover:grayscale-0 motion-safe:group-hover:scale-105"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                  </div>
+                ) : (
+                  <div class="bg-[var(--color-surface-2)] rounded-md h-48 flex items-center justify-center mb-4">
+                    <span class="text-[var(--color-body-muted)] text-sm">No Image</span>
+                  </div>
+                )}
+
+                <div class="p-5 flex flex-col flex-grow">
+                  <h2 class="text-lg font-semibold text-[var(--color-headline)] mb-2 transition-colors group-hover:text-primary">
+                    {playbook.data.title}
+                  </h2>
+                  <p class="text-sm text-[var(--color-body-light)] leading-relaxed line-clamp-4">
+                    {playbook.data.description}
+                  </p>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+
+    {totalPages > 1 && (
+      <nav class="pagination-nav" aria-label="Playbook pagination" data-aos="fade-in">
+        <div class="container mx-auto px-4 py-16">
+          <div class="flex items-center justify-center flex-wrap gap-6 text-sm text-[var(--color-body)] bg-[var(--color-surface-1)] border-t border-[var(--color-border)] pt-8 mt-8 rounded-lg">
+            {prevPage && (
+              <Button
+                href={prevPage}
+                variant="ghost"
+                class="flex items-center gap-2 text-sm px-4 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-surface-2)] motion-safe:transition-transform motion-safe:hover:scale-105"
+              >
+                <ChevronLeft size={18} />
+                Previous
+              </Button>
+            )}
+
+            <div class="flex items-center gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <a
+                  href={`${baseUrl}/${pageNum === 1 ? '' : pageNum}`}
+                  class={`w-9 h-9 flex items-center justify-center rounded-full border text-sm transition-all duration-200 motion-safe:hover:scale-105 ${
+                    currentPage === pageNum
+                      ? 'bg-primary text-white dark:text-black font-semibold'
+                      : 'border-[var(--color-border)] text-[var(--color-muted)] dark:text-[var(--color-body)] hover:bg-[var(--color-surface-2)]'
+                  }`}
+                  aria-current={currentPage === pageNum ? 'page' : undefined}
+                >
+                  {pageNum}
+                </a>
+              ))}
+            </div>
+
+            {nextPage && (
+              <Button
+                href={nextPage}
+                variant="ghost"
+                class="flex items-center gap-2 text-sm px-4 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-surface-2)] motion-safe:transition-transform motion-safe:hover:scale-105"
+              >
+                Next
+                <ChevronRight size={18} />
+              </Button>
+            )}
+          </div>
+        </div>
+      </nav>
+    )}
+  </main>
+</Layout>

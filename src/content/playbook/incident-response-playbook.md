@@ -1,10 +1,12 @@
 ---
 title: "Incident Response Playbook"
 description: "Step-by-step guidance on how to effectively respond to cloud security incidents."
+excerpt: "Step-by-step guidance on how to effectively respond to cloud security incidents."
 slug: "incident-response-playbook"
-order: 2
 publish: true
-link: "/playbooks/incident-response-playbook"
+order: 3
+publishDate: "2025-1-15"
+link: "/playbook/incident-response-playbook"
 # image:
 #   src: "https://via.placeholder.com/300x400.png?text=Incident+Response"
 #   width: 300

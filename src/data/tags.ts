@@ -4,7 +4,7 @@ interface Tags {
   description: string;
 }
 
-export const tag: Tags[] = [
+export const tags: Tags[] = [
   {
     name: 'Startup Security',
     slug: 'startup-security',
@@ -44,7 +44,7 @@ export const tag: Tags[] = [
 
 // Helper function to get category by slug
 export function getTagBySlug(slug: string): Tags | undefined {
-  return tag.find(tag => tag.slug === slug);
+  return tags.find(tag => tag.slug === slug);
 }
 
 // REVIEW: Update these tag values to be used by playbooks

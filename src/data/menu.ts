@@ -2,7 +2,7 @@
 
 export const headerMenu = [
     // { name: 'Theme Info', link: '/theme-info' },
-    { name: 'Playbooks', link: '/playbooks' },
+    { name: 'Playbooks', link: '/playbook' },
     { name: 'Blog', link: '/blog' },
     { name: 'Personas', link: '/personas', showArrow: false,
         children: [

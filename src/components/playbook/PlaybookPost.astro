@@ -1,0 +1,66 @@
+---
+import { categories } from '../../data/categories';
+import HashtagCategory from '../ui/HashtagCategory.astro';
+import Date from '../ui/Date.astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  excerpt: string;
+  featuredImage: any;
+  publishDate: Date;
+  categories: string[];
+  slug?: string;
+  index: number;
+}
+
+const { title, excerpt, featuredImage, publishDate, categories: postCategories, slug, index } = Astro.props;
+
+const validCategories = postCategories.filter((categoryName: string) =>
+  categories.some((category) => category.name === categoryName),
+);
+---
+
+<a
+  href={`/playbook/${slug}`}
+  class="group flex flex-col h-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md transition-all duration-300 motion-safe:hover:shadow-xl"
+  data-aos="fade-up"
+  data-aos-delay={index * 100}
+>
+  <div
+    class="relative aspect-[16/9] overflow-hidden border-b border-[var(--color-border)] transition-colors duration-300 group-hover:border-primary"
+  >
+    {featuredImage && (
+      <Image
+        src={featuredImage}
+        alt=""
+        width={600}
+        height={338}
+        class="object-cover w-full h-full grayscale transition-all duration-300 motion-safe:group-hover:grayscale-0 motion-safe:group-hover:scale-105"
+      />
+    )}
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 opacity-0 motion-safe:group-hover:opacity-10 transition-opacity duration-300"></div>
+  </div>
+
+  <div class="p-5 flex flex-col flex-grow relative">
+    <div class="text-sm text-muted-foreground mb-2 transition-colors duration-300 group-hover:text-primary/80">
+      <Date date={publishDate} />
+    </div>
+
+    <h2 class="text-xl font-semibold text-[var(--color-headline)] transition-colors duration-300 group-hover:text-primary">
+      {title}
+    </h2>
+
+    <p class="mt-2 mb-14 text-sm text-[var(--color-body-light)] leading-relaxed line-clamp-4 transition-colors duration-300 group-hover:text-[var(--color-body)]">
+      {excerpt}
+    </p>
+
+    <div class="absolute bottom-4 left-5 flex flex-wrap gap-1 pointer-events-none">
+      {validCategories.map((categoryName) => (
+        <div class="pointer-events-auto">
+          <HashtagCategory category={categoryName} />
+        </div>
+      ))}
+    </div>
+  </div>
+</a>

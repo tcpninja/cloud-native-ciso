@@ -1,11 +1,12 @@
 ---
 title: "Kubernetes Hardening for Early-Stage Teams"
 description: "A practical, lightweight guide to securing Kubernetes clusters for fast-moving startups using cloud-native tooling."
+excerpt: "A practical, lightweight guide to securing Kubernetes clusters for fast-moving startups using cloud-native tooling."
 slug: "kubernetes-hardening"
-order: 1
 publish: true
-publishDate: 2024-11-01
-
+order: 2
+publishDate: "2025-1-15"
+featuredImage: ./images/kubernetes-hardening.png
 # image: ../../images/playbooks/kubernetes-hardening.png
 
 audience: "developer"
@@ -23,8 +24,8 @@ tags:
 
 level: "Intermediate"
 
-ctaLabel: "Get the Secure Defaults YAML"
-ctaLink: "/downloads/k8s-secure-defaults.yaml"
+# ctaLabel: "Get the Secure Defaults YAML"
+# ctaLink: "/downloads/k8s-secure-defaults.yaml"
 
 seo:
   title: "Secure Your Kubernetes Cluster in a Day"

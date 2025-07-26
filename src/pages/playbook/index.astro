@@ -1,18 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 import { playbookSetting } from '../../data/config'; // You may need to create this file
-import PaginatedPlaybookLayout from '../../components/playbooks/PaginatedPlaybookLayout.astro';
+import PaginatedPlaybookLayout from '../../components/playbook/PaginatedPlaybookLayout.astro';
 
 export const prerender = true;
 
 const currentPage = parseInt(Astro.url.searchParams.get('page') || '1');
-const allPlaybooks = await getCollection('playbooks');
+const allPlaybooks = await getCollection('playbook');
 
-const filteredPlaybooks = allPlaybooks.filter((p) => {
-  return import.meta.env.DEV || p.data.publish !== false;
-});
+const filteredPlaybooks = allPlaybooks
 
-const sortedPlaybooks = filteredPlaybooks.sort((a, b) => a.data.order - b.data.order);
+const sortedPlaybooks = filteredPlaybooks.sort((a, b) => (a.data.order ?? 9999) - (b.data.order ?? 9999));
 
 const totalPlaybooks = sortedPlaybooks.length;
 const totalPages = Math.ceil(totalPlaybooks / playbookSetting.postsPerPage);
@@ -22,10 +20,10 @@ const paginatedPlaybooks = sortedPlaybooks.slice(start, end);
 ---
 
 <PaginatedPlaybookLayout
-  playbooks={paginatedPlaybooks}
+  playbook={paginatedPlaybooks}
   currentPage={currentPage}
   totalPages={totalPages}
-  baseUrl="/playbooks"
+  baseUrl="/playbook"
   title="Cloud Native Playbooks"
   subtitle="Actionable strategies for modern cloud security"
 />
