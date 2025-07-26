@@ -164,6 +164,9 @@
         --color-button-text: #ffffff;
         --color-button-hover-bg: var(--color-primary-dark);
 
+        /* Hero Overlay Color */
+        --hero-overlay-tint: rgba(255, 255, 255, 0.97);
+
         /* Borders and Radii */
         --color-border: #ded3c8;
         --radius-xs: 2px;
@@ -275,6 +278,9 @@
         --color-button-bg: var(--color-primary);
         --color-button-text: #ffffff;
         --color-button-hover-bg: var(--color-primary-dark);
+
+        /* Hero Overlay Color */
+        --hero-overlay-tint: rgba(0, 0, 0, 0.6);
 
         /* Borders and Radii */
         --color-border: #3f2e38;

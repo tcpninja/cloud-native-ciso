@@ -11,12 +11,10 @@ interface Props {
 
 const { posts, currentCategory } = Astro.props;
 
-// Get all posts to determine active categories
 const allPosts = await getCollection('blog', ({ data }) => {
     return import.meta.env.DEV || data.publish !== false;
 });
 
-// Filter to only show categories that have posts
 const activeCategories = categories.filter((category) =>
     allPosts.some((post) => post.data.categories?.includes(category.name)),
 );
@@ -32,34 +30,35 @@ const activeCategories = categories.filter((category) =>
             <h2 class="text-xl font-semibold tracking-tight text-[var(--color-headline)] mb-4">
                 Filter by Categories:
             </h2>
+
             <div class="flex flex-wrap gap-2 items-center">
                 <a
                     href="/blog"
-                    class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${
+                    class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-full text-sm font-medium border transition-all duration-200 motion-safe:hover:scale-[1.03] ${
                         !currentCategory
-                            ? 'bg-primary text-body-dark shadow-md'
-                            : 'bg-background text-body-base hover:bg-background-light hover:text-body-light'
+                            ? 'bg-primary text-black dark:text-white shadow-sm'
+                            : 'bg-transparent text-[var(--color-body-light)] border-[var(--color-border)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-body)]'
                     }`}
                 >
                     Show All
                 </a>
-                {
-                    activeCategories.map((category) => (
-                        <a
-                            href={`/category/${category.slug}`}
-                            class={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium border transition-all duration-200 ${
-                                !currentCategory
-                                    ? 'bg-primary text-body-dark shadow-sm'
-                                    : 'bg-transparent text-[var(--color-body-light)] border-[var(--color-border)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-body)]'
-                            }`}
-                            title={category.description}
-                        >
-                            {category.name}
-                        </a>
-                    ))
-                }
+
+                {activeCategories.map((category) => (
+                    <a
+                        href={`/category/${category.slug}`}
+                        title={category.description}
+                        class={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium border transition-all duration-200 motion-safe:hover:scale-[1.03] ${
+                            currentCategory === category.slug
+                                ? 'bg-primary text-black dark:text-white shadow-sm'
+                                : 'bg-transparent text-[var(--color-body-light)] border-[var(--color-border)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-body)]'
+                        }`}
+                    >
+                        {category.name}
+                    </a>
+                ))}
             </div>
         </div>
+
         <p class="text-sm text-[var(--color-body-light)] text-left sm:text-right whitespace-nowrap">
             Showing <span class="font-semibold text-primary">{posts.length}</span> of
             <span class="font-semibold text-primary"> {allPosts.length}</span> posts
@@ -67,21 +66,19 @@ const activeCategories = categories.filter((category) =>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {
-            posts.map((post, index) => (
-                <div>
-                    <BlogPost
-                        title={post.data.title}
-                        excerpt={post.data.excerpt}
-                        featuredImage={post.data.featuredImage || ''}
-                        publishDate={post.data.publishDate}
-                        categories={post.data.categories || []}
-                        slug={post.id}
-                        index={index}
-                    />
-                </div>
-            ))
-        }
+        {posts.map((post, index) => (
+            <div>
+                <BlogPost
+                    title={post.data.title}
+                    excerpt={post.data.excerpt}
+                    featuredImage={post.data.featuredImage || ''}
+                    publishDate={post.data.publishDate}
+                    categories={post.data.categories || []}
+                    slug={post.id}
+                    index={index}
+                />
+            </div>
+        ))}
     </div>
 
     {posts.length === 0 && (

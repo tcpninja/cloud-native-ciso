@@ -1,61 +1,76 @@
 ---
 import { Image } from 'astro:assets';
 
+// Define structure for hero content props
 interface HeroContent {
-    title: string;
-    description: string;
-    backgroundImage?: any;
-    overlayOpacity?: number; // Value between 0 and 1
+  title: string;
+  description: string;
+  backgroundImage?: any;
+  overlayOpacity?: number;
 }
 
 interface Props {
-    content: HeroContent;
+  content: HeroContent;
 }
 
+// Destructure and assign default values
 const { content } = Astro.props;
-const opacity = content.overlayOpacity ?? 1;
+const opacity = content.overlayOpacity ?? 0.85;
 ---
 
-<section class="w-full border-b border-[var(--color-border)] pt-38 pb-18 relative bg-[var(--color-background-dark)] text-[var(--color-headline)]">
-    <div class="absolute inset-0 left-0 top-0 w-full h-full overflow-hidden">
-            {content.backgroundImage && (
-                <Image
-                    src={content.backgroundImage}
-                    alt=""
-                    width={1920}
-                    height={1080}
-                    class="w-full h-full object-cover"
-                    quality={70}
-                    format="webp"
-                />
-            )}
-            <div
-                class="absolute inset-0 left-0 top-0 w-full h-full bg-[var(--color-background-dark)] mix-blend-multiply backdrop-blur-sm"
-                style={`opacity: ${opacity};`}
-            ></div>
-        </div>
+<!-- Inner hero section with background image and text content -->
+<section class="w-full border-b border-[var(--color-border)] pt-38 pb-18 relative text-[var(--color-headline)]">
+  {content.backgroundImage && (
+    <div class="absolute inset-0 w-full h-full z-0">
+      <!-- Background Image: Styled for grayscale and subtle motion -->
+      <Image
+        src={content.backgroundImage}
+        alt=""
+        width={1920}
+        height={1080}
+        class="w-full h-full object-cover grayscale transition duration-700"
+        quality={70}
+        format="webp"
+        loading="eager"
+        decoding="async"
+      />
 
-    <div class="site-container mx-auto px-4 relative z-10">
-        <div>
-            <!-- <h1 class="text-white" data-aos="fade-up">{content.title}</h1>
-            {content.description && <p class="subtitle text-white" data-aos="fade-up" data-aos-delay="100">{content.description}</p>} -->
-            <h1 
-                class="font-headline text-[var(--color-headline)] leading-tight mb-2 drop-shadow-sm"
-                style="font-size: var(--text-4xl);" 
-                data-aos="fade-up"
-            >
-                {content.title}
-            </h1>
-            {content.description && (
-                <p 
-                    class="subtitle text-[var(--color-body-base)] max-w-2xl leading-relaxed"
-                    style="font-size: var(--text-lg);" 
-                    data-aos="fade-up" 
-                    data-aos-delay="100"
-                >
-                    {content.description}
-                </p>
-            )}            
-        </div>
+      <!-- Tint + Blur Overlay: Theme-aware tint for readability -->
+      <div
+        class="absolute inset-0 w-full h-full backdrop-blur-sm transition duration-700"
+        style={`background-color: var(--hero-overlay-tint); opacity: ${opacity};`}
+        data-theme-overlay
+      ></div>
+
+      <!-- Gradient mask for extra text clarity across light/dark modes -->
+      <div
+        class="absolute inset-0 w-full h-full backdrop-blur-sm bg-[var(--hero-overlay-tint)] opacity-80 transition-all duration-700"
+        data-theme-overlay
+      ></div>
     </div>
+  )}
+
+  <!-- Foreground text content -->
+  <div class="site-container mx-auto px-4 relative z-10">
+    <div class="max-w-3xl">
+      <h1
+        class="font-headline text-[var(--color-headline)] leading-tight mb-2 drop-shadow-sm"
+        style="font-size: var(--text-4xl);"
+        data-aos="fade-up"
+      >
+        {content.title}
+      </h1>
+
+      {content.description && (
+        <p
+          class="subtitle text-[var(--color-body-base)] max-w-2xl leading-relaxed"
+          style="font-size: var(--text-lg);"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          {content.description}
+        </p>
+      )}
+    </div>
+  </div>
 </section>
