@@ -27,5 +27,5 @@ export const playbookSetting = {
 };
 
 export const themeSetting = {
-  theme: 'cloudnativeciso-dark'
+  theme: 'system'
 }

@@ -1,0 +1,84 @@
+---
+import { Sun, Moon, Laptop } from 'lucide-astro';
+
+const getNextTheme = (current: 'light' | 'dark' | 'system' | null): 'light' | 'dark' | 'system' => {
+  switch (current) {
+    case 'light': return 'dark';
+    case 'dark': return 'system';
+    default: return 'light';
+  }
+};
+---
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.querySelector('[data-theme-toggle]');
+    const root = document.documentElement;
+
+    // Get system preference or fallback to dark
+    const resolveSystemPreference = () => {
+      try {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      } catch {
+        return 'dark';
+      }
+    };
+
+    // Core theme application logic
+    const applyTheme = (theme: string) => {
+      const resolvedTheme = theme === 'system' ? resolveSystemPreference() : theme;
+      root.setAttribute('data-theme', resolvedTheme);
+      localStorage.setItem('theme', theme);
+
+      ['light', 'dark', 'system'].forEach((t) => {
+        const icon = button?.querySelector(`.icon-${t}`) as HTMLElement | null;
+        if (icon) {
+          icon.style.opacity = t === theme ? '1' : '0';
+          icon.style.display = t === theme ? 'block' : 'none';
+        }
+      });
+    };
+
+    // Load stored theme on page load
+    const storedTheme = (localStorage.getItem('theme') ?? 'system');
+    applyTheme(storedTheme);
+
+    // Add click listener
+    if (button) {
+      button.addEventListener('click', () => {
+        const currentTheme = (localStorage.getItem('theme') ?? 'system');
+        const nextTheme = currentTheme === 'light' ? 'dark' : currentTheme === 'dark' ? 'system' : 'light';
+        applyTheme(nextTheme);
+      });
+    }
+
+    // React to OS-level preference changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', () => {
+      if (localStorage.getItem('theme') === 'system') {
+        applyTheme('system');
+      }
+    });
+  });
+</script>
+
+<!-- Theme toggle button -->
+<div class="flex items-center gap-2 sm:gap-3">
+  <button
+    data-theme-toggle
+    aria-label="Toggle theme"
+    title="Toggle theme"
+    class="w-9 h-9 sm:w-10 sm:h-10 relative flex items-center justify-center rounded-full
+           border border-black/5 dark:border-white/10
+           bg-white/20 dark:bg-white/5
+           backdrop-blur-md backdrop-brightness-110
+           text-black dark:text-white
+           shadow-md ring-1 ring-black/5 dark:ring-white/5
+           opacity-90 hover:opacity-100
+           transition-all duration-300 ease-in-out hover:scale-105"
+  >
+    <Sun class="icon-light absolute transition-opacity duration-300 opacity-0 w-5 h-5" />
+    <Moon class="icon-dark absolute transition-opacity duration-300 opacity-0 w-5 h-5" />
+    <Laptop class="icon-system absolute transition-opacity duration-300 opacity-0 w-5 h-5" />
+  </button>
+</div>

@@ -1,20 +1,20 @@
 ---
 const themes = [
-    { id: 'zeus', label: 'Zeus', desc: 'Sky & Thunder' },      // Royal blue & gold
-    { id: 'crimsonCipher', label: 'Crimson', desc: 'Fire & Cipher' },   // Cipher with a flare of Red
-    { id: 'crimsonAura', label: 'Aura', desc: 'Luxurious and Refined' },   // Cipher with a flare of Luxury
-    { id: 'cloudnativeciso-dark', label: 'CISO-dark', desc: 'CISO feel' },   // Branding custom.
+    // { id: 'zeus', label: 'Zeus', desc: 'Sky & Thunder' },      // Royal blue & gold
+    // { id: 'crimsonCipher', label: 'Crimson', desc: 'Fire & Cipher' },   // Cipher with a flare of Red
+    // { id: 'crimsonAura', label: 'Aura', desc: 'Luxurious and Refined' },   // Cipher with a flare of Luxury
+    // { id: 'cloudnativeciso-dark', label: 'CISO-dark', desc: 'CISO feel' },   // Branding custom.
     {
-        id: 'pixelgradeElegance',
-        label: 'Elegance',
+        id: 'light',
+        label: 'Light',
         desc: 'Editorial Aesthetic',
         previewPrimary: '#5e3c58',
         previewSecondary: '#e9b44c',
         previewAccent: '#dd6e42'
     },
     {
-        id: 'pixelgradeElegance-dark',
-        label: 'Elegance Dark',
+        id: 'dark',
+        label: 'Dark',
         desc: 'Editorial but Dark',
         previewPrimary: '#cdb4db',
         previewSecondary: '#ffafcc',
@@ -65,57 +65,63 @@ const themes = [
 </div>
 
 <script>
-    const themeButton = document.getElementById('theme-button');
-    const themeDropdown = document.getElementById('theme-dropdown');
-    const themeOptions = document.querySelectorAll('.theme-option');
-    
-    if (!themeButton || !themeDropdown) throw new Error('Theme switcher elements not found');
-    
-    // Get theme from localStorage or default to 'thor'
-    const currentTheme = localStorage.getItem('theme') || 'thor';
-    document.body.setAttribute('data-theme', currentTheme);
+	const themeButton = document.getElementById('theme-button');
+	const themeDropdown = document.getElementById('theme-dropdown');
+	const themeOptions = document.querySelectorAll('.theme-option');
+	const root = document.documentElement;
 
-    // Toggle dropdown
-    themeButton.addEventListener('click', () => {
-        const isExpanded = themeDropdown.classList.toggle('hidden') === false;
-        themeButton.setAttribute('aria-expanded', isExpanded.toString());
-    });
+	if (!themeButton || !themeDropdown) throw new Error('Theme switcher elements not found');
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!document.getElementById('theme-switcher')?.contains(e.target as Node )) {
-            themeDropdown.classList.add('hidden');
-            themeButton.setAttribute('aria-expanded', 'false');
-        }
-    });
+	// ✅ Apply saved theme or prefers-color-scheme at load time
+	const savedTheme = localStorage.getItem('theme');
+	if (savedTheme) {
+		root.setAttribute('data-theme', savedTheme);
+	} else {
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const defaultTheme = prefersDark ? 'pixelgradeElegance-dark' : 'pixelgradeElegance';
+		root.setAttribute('data-theme', defaultTheme);
+		localStorage.setItem('theme', defaultTheme);
+	}
 
-    // Handle theme selection
-    themeOptions.forEach(option => {
+	// ✅ Toggle dropdown visibility
+	themeButton.addEventListener('click', () => {
+		const isExpanded = themeDropdown.classList.toggle('hidden') === false;
+		themeButton.setAttribute('aria-expanded', isExpanded.toString());
+	});
+
+	// ✅ Close dropdown on outside click
+	document.addEventListener('click', (e) => {
+		if (!document.getElementById('theme-switcher')?.contains(e.target as Node)) {
+			themeDropdown.classList.add('hidden');
+			themeButton.setAttribute('aria-expanded', 'false');
+		}
+	});
+
+	// ✅ Apply theme on selection
+	themeOptions.forEach(option => {
         option.addEventListener('click', () => {
-            const newTheme = (option as HTMLElement).dataset.theme;
+            const el = option as HTMLElement;
+            const newTheme = el.dataset.theme;
             if (newTheme) {
-                document.body.setAttribute('data-theme', newTheme);
+                document.documentElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
                 themeDropdown.classList.add('hidden');
                 themeButton.setAttribute('aria-expanded', 'false');
-                
-                // Announce theme change to screen readers
-                const themeName = (option as HTMLElement).querySelector('.text-sm')?.textContent;
+
+                // Accessibility announcement
+                const themeName = el.querySelector('.text-sm')?.textContent;
                 if (themeName) {
                     const announcement = document.createElement('div');
                     announcement.setAttribute('aria-live', 'polite');
                     announcement.classList.add('sr-only');
                     announcement.textContent = `Theme changed to ${themeName}`;
                     document.body.appendChild(announcement);
-                    
-                    // Remove announcement after it's been read
-                    setTimeout(() => {
-                        document.body.removeChild(announcement);
-                    }, 3000);
+                    setTimeout(() => announcement.remove(), 3000);
                 }
             }
         });
     });
+
 </script>
 
 <style>

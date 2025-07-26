@@ -1,9 +1,12 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { categories } from '@data/categories';
+import { tag } from '@data/tags';
 
 // Extract category names for the enum
 const categoryNames = categories.map((category) => category.name);
+// Extract tag names from the enum
+const tagNames = tag.map((tag) => tag.name);
 
 const blog = defineCollection({
     loader: glob({ base: './src/content/blog', pattern: '**/*.md' }),
