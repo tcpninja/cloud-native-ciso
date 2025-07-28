@@ -21,29 +21,29 @@ const {
 } = Astro.props;
 
 const baseStyles =
-  'group relative inline-flex overflow-hidden items-center justify-center rounded-border-small font-medium transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-md flex items-center gap-2';
+  'group relative inline-flex items-center justify-center overflow-hidden font-medium rounded-md transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2';
 
 const variants = {
   primary:
-    'bg-primary text-white hover:bg-primary-light focus-visible:ring-primary hover:ring-2 hover:ring-primary hover:ring-offset-2',
+    'bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-dark)] focus-visible:ring-[var(--color-primary)]',
   secondary:
-    'bg-secondary text-white hover:bg-secondary-light focus-visible:ring-secondary hover:ring-2 hover:ring-secondary hover:ring-offset-2',
+    'bg-[var(--color-secondary)] text-white hover:bg-[var(--color-secondary-light)] focus-visible:ring-[var(--color-secondary)]',
   accent:
-    'bg-accent text-white hover:opacity-90 focus-visible:ring-accent hover:ring-2 hover:ring-accent hover:ring-offset-2',
+    'bg-[var(--color-accent)] text-white hover:opacity-90 focus-visible:ring-[var(--color-accent)]',
   ghostLight:
-    'text-white ring-2 ring-white focus-visible:ring-white hover:ring-2 hover:ring-black hover:ring-offset-2',
+    'text-white border border-white hover:border-black',
   ghostDark:
-    'text-body-base ring-2 ring-text focus-visible:ring-text hover:ring-2 hover:ring-black hover:ring-offset-2',
+    'text-[var(--color-body)] border border-[var(--color-border)] hover:border-[var(--color-primary)]',
   ghost:
-    'border border-[var(--color-border)] text-[var(--color-body-light)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-body)] transition-colors',
+    'border border-[var(--color-border)] text-[var(--color-body-light)] hover:bg-[var(--color-surface)] hover:text-[var(--color-body)]',
   ghostSolid:
-    'bg-[var(--color-surface-1)] border border-[var(--color-border)] text-[var(--color-body-light)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-body)] transition-colors',
+    'bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-body-light)] hover:bg-[var(--color-background-light)] hover:text-[var(--color-body)]',
 };
 
 const sizes = {
-  sm: 'h-9 px-3 text-xsmall',
-  md: 'h-10 px-4 py-2 text-small',
-  lg: 'h-11 px-8 text-base',
+  sm: 'h-9 px-3 text-[var(--text-xsmall)]',
+  md: 'h-10 px-4 py-2 text-[var(--text-small)]',
+  lg: 'h-11 px-8 text-[var(--text-base)]',
 };
 
 const classes = [baseStyles, variants[variant], sizes[size], className].join(' ');
@@ -60,7 +60,6 @@ const Element = href ? 'a' : 'button';
   aria-disabled={disabled}
   {...(target && { target, rel: target === '_blank' ? 'noopener noreferrer' : undefined })}
 >
-  {/* Subtle sliding shine effect */}
   <span
     class="
       absolute

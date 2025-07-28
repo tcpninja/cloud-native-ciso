@@ -68,7 +68,6 @@
     --text-article-h4: clamp(1rem, 2vw + 0.125rem, 1.35rem);
     --text-article-h5: clamp(0.875rem, 1.5vw + 0.0625rem, 1.15rem);
     --text-article-h6: clamp(0.75rem, 1.2vw + 0.03125rem, 0.9rem);
-    --text-article-h6: clamp(0.75rem, 1.2vw + 0.03125rem, 0.9rem);
     
     --text-xsmall: clamp(0.625rem, 1.5vw + 0.0625rem, 0.75rem);
     --text-small: clamp(0.875rem, 1.5vw + 0.0625rem, 1rem);
@@ -87,11 +86,14 @@
     --border-radius-base: 1rem;
     --border-radius-large: 2rem;
     
-    --font-base: 'Inter', 'Noto Sans', sans-serif;
+    --font-base: 'Inter', sans-serif;
     --font-logo: 'Satoshi', sans-serif;
     --font-bruno-ace: 'Orbitron', sans-serif;
     --font-noto-sans-kr: 'Noto Sans KR', sans-serif;
-    --font-headline: 'IBM Plex Sans', 'Noto Sans', sans-serif;
+    --font-headline: 'DM Sans', 'Inter', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+
+
 }
 
 @layer base {
@@ -126,7 +128,7 @@
         --color-body-dark: #1e1c1a;
 
         /* Eyebrow / Accent Text */
-        --color-eyebrow: #e3674a;
+        --color-eyebrow: #cc573c;
         --color-eyebrow-light: #f29b77;
         --color-eyebrow-dark: #a64c29;
 
@@ -159,6 +161,9 @@
         --color-code-text: #3c3c3c;
         --color-code-border: #d8cec3;
 
+        --color-surface: var(--color-background-light);
+        --color-surface-glass: rgba(255, 255, 255, 0.7);
+
         /* Buttons */
         --color-button-bg: var(--color-primary);
         --color-button-text: #ffffff;
@@ -177,13 +182,13 @@
 
         /* Fonts */
         --font-body: 'Inter', system-ui, sans-serif;
-        --font-heading: 'Libre Baskerville', Georgia, serif;
-        --font-mono: 'Fira Code', monospace;
+        --font-weight-heading: 600;
+        --font-weight-body: 400;
 
         /* Font Sizes */
         --text-xs: 0.75rem;
         --text-sm: 0.875rem;
-        --text-base: 1rem;
+        --text-base: 1.05rem;
         --text-lg: 1.125rem;
         --text-xl: 1.375rem;
         --text-2xl: 1.75rem;
@@ -222,6 +227,7 @@
         --color-secondary: #e5b85e;
         --color-secondary-light: #fbe7b5;
         --color-secondary-dark: #d8a837;
+        
 
         /* Accent (Terracotta) */
         --color-accent: #f27d5f;
@@ -275,13 +281,16 @@
         --color-code-text: #e0e0e0;
         --color-code-border: #4e3f46;
 
+        --color-surface: var(--color-background-light);
+        --color-surface-glass: rgba(26, 21, 23, 0.7);
+
         /* Buttons */
         --color-button-bg: var(--color-primary);
         --color-button-text: #ffffff;
         --color-button-hover-bg: var(--color-primary-dark);
 
         /* Hero Overlay Color */
-        --hero-overlay-tint: rgba(22, 18, 21, 0.75)
+        --hero-overlay-tint: rgba(22, 18, 21, 0.75);
 
         /* Borders and Radii */
         --color-border: #5c4b56;
@@ -293,13 +302,13 @@
 
         /* Fonts */
         --font-body: 'Inter', system-ui, sans-serif;
-        --font-heading: 'Libre Baskerville', Georgia, serif;
-        --font-mono: 'Fira Code', monospace;
+        --font-weight-heading: 600;
+        --font-weight-body: 400;
 
         /* Font Sizes */
         --text-xs: 0.75rem;
         --text-sm: 0.875rem;
-        --text-base: 1rem;
+        --text-base: 1.05rem;
         --text-lg: 1.125rem;
         --text-xl: 1.375rem;
         --text-2xl: 1.75rem;
@@ -434,6 +443,14 @@ pre[class*="language-"] {
     margin-right: 1rem;
 }
 
+.card {
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.3s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-elevated);
+}
+
 :where(p, li, strong, em, b, i, u, s, a, blockquote, h1, h2, h3, h4, h5, h6)>code:not([class*="language-"]) {
     font-size: var(--text-small);
     background-color: var(--color-background-light);
@@ -442,6 +459,15 @@ pre[class*="language-"] {
     border-radius: 2px;
     font-weight: 400;
 }
+
+.bg-muted-gradient {
+  background: linear-gradient(
+    to bottom right,
+    var(--color-background-light),
+    var(--color-background)
+  );
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .logo {
@@ -458,4 +484,92 @@ pre[class*="language-"] {
       transform: translateY(0);
     }
   }
+}
+
+.card-hover-effect {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    will-change: transform;
+}
+.card-hover-effect:hover {
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-2px);
+}
+
+.bg-accent-gradient {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+}
+.bg-primary-gradient {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+}
+
+.border-muted {
+    border: 1px solid var(--color-border);
+}
+
+.bg-surface {
+    background-color: var(--color-background-light);
+}
+.bg-surface-dark {
+    background-color: var(--color-background-dark);
+}
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+  background-color: var(--color-surface-glass);
+}
+
+
+.motion-scale-sm {
+    transition: transform 0.3s ease;
+}
+.motion-scale-sm:hover {
+    transform: scale(1.02);
+}
+@media (prefers-reduced-motion: reduce) {
+    .motion-scale-sm:hover {
+        transform: none;
+    }
+}
+
+.text-transition {
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.button-gradient {
+    background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    transition: background 0.3s ease;
+}
+.button-gradient:hover {
+    background-image: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+}
+.button-outline {
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+.button-outline:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary-dark);
+}
+
+.section-divider {
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+.section-divider-gradient {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: var(--space-xl) 0;
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+}
+
+.surface-elevated {
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-elevated);
+  border-radius: var(--radius-md);
 }
