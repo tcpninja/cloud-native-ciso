@@ -10,7 +10,6 @@ const heroContent = {
   overlayOpacity: 0.85,
 };
 ---
-
 <Layout title="Our Security Philosophy">
   <InnerHero content={heroContent} />
 
@@ -18,7 +17,7 @@ const heroContent = {
     <div class="text-center max-w-3xl mx-auto mb-16"></div>
 
     <div class="space-y-10">
-      {principles.map(({ title, description, quote, icon: Icon }) => (
+      {principles.map(({ title, description, quote, icon: Icon }, index) => (
         <details
           class="group rounded-2xl p-6 transition-shadow open:shadow-lg backdrop-blur-sm"
           style="background-color: var(--color-surface);"
@@ -26,6 +25,8 @@ const heroContent = {
           <summary
             class="list-none cursor-pointer flex items-center justify-between gap-4 text-xl font-semibold transition-colors"
             style="color: var(--color-headline);"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
           >
             <div class="flex items-center gap-4">
               {Icon && <Icon class="w-6 h-6 shrink-0" style="color: var(--color-muted);" />}
@@ -45,7 +46,11 @@ const heroContent = {
             </svg>
           </summary>
 
-          <div class="mt-4 text-base leading-relaxed text-[var(--color-body-base)] transition-colors duration-300">
+          <div
+            class="mt-4 text-base leading-relaxed text-[var(--color-body-base)] transition-colors duration-300"
+            data-aos="fade-up"
+            data-aos-delay={index * 100 + 100}
+          >
             <p class="mb-4">{description}</p>
             {quote && (
               <blockquote class="border-l-4 border-accent/70 pl-4 italic text-[var(--color-body-light)] transition-colors duration-300">
@@ -56,6 +61,7 @@ const heroContent = {
         </details>
       ))}
     </div>
+
     <div class="text-center max-w-3xl mx-auto mb-16"></div>
   </section>
 </Layout>
