@@ -54,6 +54,12 @@
             "type": "string"
           }
         },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "level": {
           "type": "string",
           "enum": [

@@ -13,7 +13,7 @@ interface Props {
 const { padding, paddingTop, paddingBottom } = Astro.props;
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
-const playbooks = await getCollection('playbooks', ({ data }) => {
+const playbooks = await getCollection('playbook', ({ data }) => {
   return data.publish !== false;
 });
 

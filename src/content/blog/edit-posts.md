@@ -5,7 +5,7 @@ featuredImage: "./images/edit-posts.jpg"
 publishDate: "2025-02-22"
 publish: true
 categories: ["Cloud Native Security"]
-
+featured: true
 seo:
   title: "How to edit posts in Astro"
   description: "Learn how to edit posts in Astro"

@@ -7,6 +7,7 @@ publish: true
 order: 1
 publishDate: "2025-1-15"
 link: "/playbook/cloud-security-basics"
+categories: ["Startup Security"]
 tags: ["kubernetes", "k8s"]
 # featureimage: 
 # image:

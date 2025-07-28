@@ -98,22 +98,22 @@
     
     [data-theme='light'] {
         /* Primary Palette (Elegant Muted Plum) */
-        --color-primary: #5e3c58;
+        --color-primary: #6b445f;
         --color-primary-light: #916b85;
         --color-primary-dark: #3b2636;
 
         /* Secondary (Golden Ochre) */
-        --color-secondary: #e9b44c;
+        --color-secondary: #dca23f;
         --color-secondary-light: #f3cd80;
         --color-secondary-dark: #bb8d29;
 
         /* Accent (Terracotta) */
-        --color-accent: #dd6e42;
+        --color-accent: #d65c3f;
 
         /* Backgrounds (Soft Editorial Beige Tones) */
         --color-background: #fefaf6;
-        --color-background-light: #f8f3ee;
-        --color-background-dark: #e5ddd5;
+        --color-background-light: #f7f1eb;
+        --color-background-dark: #dfd7d1;
 
         /* Headline Typography */
         --color-headline: #3b2f2f;
@@ -122,11 +122,11 @@
 
         /* Body Text */
         --color-body-base: #403b36;
-        --color-body-light: #5e5852;
+        --color-body-light: #5c5450;
         --color-body-dark: #1e1c1a;
 
         /* Eyebrow / Accent Text */
-        --color-eyebrow: #dd6e42;
+        --color-eyebrow: #e3674a;
         --color-eyebrow-light: #f29b77;
         --color-eyebrow-dark: #a64c29;
 
@@ -165,10 +165,10 @@
         --color-button-hover-bg: var(--color-primary-dark);
 
         /* Hero Overlay Color */
-        --hero-overlay-tint: rgba(255, 255, 255, 0.97);
+        --hero-overlay-tint: rgba(255, 248, 240, 0.9);
 
         /* Borders and Radii */
-        --color-border: #ded3c8;
+        --color-border: #d8ccc0;
         --radius-xs: 2px;
         --radius-sm: 4px;
         --radius-md: 8px;
@@ -195,6 +195,7 @@
         --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
         --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
         --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.12);
+        --shadow-elevated: 0 4px 8px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.03);
 
         /* Spacing */
         --space-xs: 0.25rem;
@@ -213,22 +214,22 @@
 
     [data-theme='dark'] {
         /* Primary Palette (Elegant Muted Plum) */
-        --color-primary: #c3a9bd;
+        --color-primary: #cdb4c9;
         --color-primary-light: #e3d4df;
         --color-primary-dark: #9c7b9a;
 
         /* Secondary (Golden Ochre) */
-        --color-secondary: #f4c97a;
+        --color-secondary: #e5b85e;
         --color-secondary-light: #fbe7b5;
         --color-secondary-dark: #d8a837;
 
         /* Accent (Terracotta) */
-        --color-accent: #f58b6c;
+        --color-accent: #f27d5f;
 
         /* Backgrounds (Deep Editorial Eggplant & Slate) */
         --color-background: #1a1517;
-        --color-background-light: #2a2226;
-        --color-background-dark: #0e0a0d;
+        --color-background-light: #2f262a;
+        --color-background-dark: #130f11;
 
         /* Headline Typography */
         --color-headline: #f5f3f2;
@@ -237,12 +238,12 @@
 
         /* Body Text */
         --color-body-base: #d6d0cc;
-        --color-body-light: #e4e0db;
+        --color-body-light: #e2ded8;
         --color-body-dark: #ffffff;
 
         /* Eyebrow / Accent Text */
         --color-eyebrow: #f58b6c;
-        --color-eyebrow-light: #fabba4;
+        --color-eyebrow-light: #f9ae93;
         --color-eyebrow-dark: #c46748;
 
         /* Input Fields */
@@ -270,7 +271,7 @@
         --color-footer-logo: var(--color-primary);
 
         /* Code Blocks */
-        --color-code-bg: #2a2226;
+        --color-code-bg: #2e2530;
         --color-code-text: #e0e0e0;
         --color-code-border: #4e3f46;
 
@@ -280,10 +281,10 @@
         --color-button-hover-bg: var(--color-primary-dark);
 
         /* Hero Overlay Color */
-        --hero-overlay-tint: rgba(0, 0, 0, 0.6);
+        --hero-overlay-tint: rgba(22, 18, 21, 0.75)
 
         /* Borders and Radii */
-        --color-border: #3f2e38;
+        --color-border: #5c4b56;
         --radius-xs: 2px;
         --radius-sm: 4px;
         --radius-md: 8px;
@@ -310,6 +311,7 @@
         --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
         --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
         --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.6);
+        --shadow-elevated: 0 4px 6px rgba(0,0,0,0.5), 0 2px 4px rgba(94,60,88,0.1);
 
         /* Spacing */
         --space-xs: 0.25rem;

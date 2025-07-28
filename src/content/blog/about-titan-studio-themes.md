@@ -4,6 +4,7 @@ excerpt: "Learn about Titan Studio Themes and our mission to create beautiful, f
 featuredImage: "./images/titan-studio-themes.jpg"
 publishDate: "2023-11-15"
 publish: true
+featured: true
 categories: ["Startup Security"]
 
 seo:

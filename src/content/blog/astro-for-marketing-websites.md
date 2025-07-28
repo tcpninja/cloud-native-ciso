@@ -5,7 +5,7 @@ featuredImage: "./images/astro-marketing.jpg"
 publishDate: "2025-03-15"
 publish: true
 categories: ["Cloud Native Security"]
-
+featured: true
 seo:
   title: "Why Astro JS is Perfect for Marketing Websites"
   description: "Discover why Astro JS is the ideal framework for building high-performance marketing websites that convert visitors into customers"

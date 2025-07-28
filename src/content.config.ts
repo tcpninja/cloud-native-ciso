@@ -14,6 +14,7 @@ const blog = defineCollection({
         z.object({
             title: z.string(),
             excerpt: z.string(),
+            featured: z.boolean().default(false).optional(),
             featuredImage: image().optional(),
             publishDate: z.string().transform((str) => new Date(str)),
             publish: z.boolean().default(true),
@@ -49,6 +50,7 @@ const playbook = defineCollection({
         audience: z.enum(['founder', 'developer', 'product-manager', 'security-lead']).optional(),
         focus: z.array(z.string()).optional(),
         tags: z.array(z.string()).optional(),
+        categories: z.array(z.string()).optional(),
         level: z.enum(['Beginner', 'Intermediate', 'Advanced']).optional(),
 
         // Optional call to action

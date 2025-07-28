@@ -5,7 +5,7 @@ featuredImage: "./images/building-pages.jpg"
 publishDate: "2025-02-22"
 publish: true
 categories: ["Cloud Native Security"]
-
+featured: true
 seo:
   title: "How to build pages with Titan Core components"
   description: "Learn how to build pages with Titan Core components"
