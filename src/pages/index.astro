@@ -22,35 +22,40 @@ const seoTitle = "Cloud Native CISO | Security in a Cloud-Native World";
 const seoDescription = "A real-world journey of building cloud-native security as an aspiring CISO — sharing lessons, strategies, and pitfalls from securing startups.";
 
 const heroContent = {
-    title: 'Security for Startups, Built in Public',
-    description: 'No silver bullets. Just honest lessons from building security into cloud-native startups — one Git commit, incident postmortem, and YAML file at a time. For builders, leaders, and aspiring CISOs navigating complexity without a rulebook.',
-    buttons: [
-        {
-            text: 'Start Reading',
-            link: '/contact',
-            target: '_self'
-        },
-        {
-            text: 'Follow the Journey',
-            link: 'https://github.com/tcpninja/cloud-native-ciso',
-            target: '_blank'
-        }
-    ],
-    backgroundImage: heroImage,
-    overlayOpacity: 0.2
-}
+  title: 'Forget the Checklist. Build Real Security.',
+  description:
+    'Security shouldn’t be a blocker. Cloud Native CISO helps you build smarter, scale faster, and secure what matters — without the noise, fear, or vendor bloat.',
+  buttons: [
+    {
+      text: 'Start Reading',
+      link: '/playbooks', // Consider pointing this to actual content vs. /contact
+      target: '_self',
+    },
+    {
+      text: 'Follow the Journey',
+      link: 'https://github.com/tcpninja/cloud-native-ciso',
+      target: '_blank',
+    },
+  ],
+  backgroundImage: heroImage,
+  overlayOpacity: 0.2,
+};
+
 
 const featuresSection = {
-    eyebrow: "CORE PRINCIPLES",
-    title: "Security That Makes Sense (and Scales)",
-    description: "I\’m chasing the idea that security can be usable, effective, and not kill velocity. These are the lenses I\'m using to make sense of the chaos.",
-    features: featureLists.main.features,
-    button: {
-        text: "Learn Our Security Philosophy",
-        link: "/philosophy",  // REVIEW: we will create this later
-        variant: "primary" as const
-    }
+  eyebrow: "Why We Exist",
+  title: "Security That Works Before You Have a CISO",
+  description:
+    "Security isn’t just about passing audits — it’s how early teams build trust, protect what matters, and scale with confidence. We help founders and builders integrate cloud-native security without breaking momentum. These are the principles behind everything we do.",
+  features: featureLists.main.features,
+  button: {
+    text: "Explore Our Philosophy",
+    link: "/philosophy",
+    variant: "primary" as const
+  }
 }
+
+
 
 const FooterCta = {
     eyebrow: "Join The Community",

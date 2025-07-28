@@ -1,0 +1,61 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { principles } from '@data/philosophy.ts';
+import InnerHero from '@components/sections/InnerHero.astro';
+
+const heroContent = {
+  title: 'How We Think About Security',
+  description:
+    'These aren’t buzzwords — they’re the core beliefs guiding everything we publish, build, and protect. Grounded. Practical. Human-first.',
+  overlayOpacity: 0.85,
+};
+---
+
+<Layout title="Our Security Philosophy">
+  <InnerHero content={heroContent} />
+
+  <section class="max-w-6xl mx-auto px-6 sm:px-8 py-32">
+    <div class="text-center max-w-3xl mx-auto mb-16"></div>
+
+    <div class="space-y-10">
+      {principles.map(({ title, description, quote, icon: Icon }) => (
+        <details
+          class="group rounded-2xl p-6 transition-shadow open:shadow-lg backdrop-blur-sm"
+          style="background-color: var(--color-surface);"
+        >
+          <summary
+            class="list-none cursor-pointer flex items-center justify-between gap-4 text-xl font-semibold transition-colors"
+            style="color: var(--color-headline);"
+          >
+            <div class="flex items-center gap-4">
+              {Icon && <Icon class="w-6 h-6 shrink-0" style="color: var(--color-muted);" />}
+              <span>{title}</span>
+            </div>
+            <svg
+              class="ml-auto h-5 w-5 transform transition-transform duration-300 group-open:rotate-180"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              style="color: var(--color-muted);"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.354a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </summary>
+
+          <div class="mt-4 text-base leading-relaxed text-[var(--color-body-base)] transition-colors duration-300">
+            <p class="mb-4">{description}</p>
+            {quote && (
+              <blockquote class="border-l-4 border-accent/70 pl-4 italic text-[var(--color-body-light)] transition-colors duration-300">
+                “{quote}”
+              </blockquote>
+            )}
+          </div>
+        </details>
+      ))}
+    </div>
+    <div class="text-center max-w-3xl mx-auto mb-16"></div>
+  </section>
+</Layout>
