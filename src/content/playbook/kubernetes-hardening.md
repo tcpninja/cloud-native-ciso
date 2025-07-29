@@ -46,7 +46,7 @@ Kubernetes is powerful — but dangerous if misconfigured. Early-stage companies
 
 ## 1. Use Pod Security Admission (PSA)
 
-```yaml
+```yaml title="PodSecurityPolicy.yaml"
 apiVersion: policy/v1
 kind: PodSecurityPolicy
 metadata:

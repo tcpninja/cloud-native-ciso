@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-// import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import { SEO, siteConfig, themeSetting } from "../data/config";
 import 'aos/dist/aos.css';
 
@@ -47,11 +46,8 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 				if (stored === 'system') {
 					const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 					resolved = prefersDark ? 'dark' : 'light';
-				}
-
-				document.documentElement.setAttribute('data-theme', resolved);
-				} catch(e) {
-				document.documentElement.setAttribute('data-theme', 'dark');
+				} document.documentElement.setAttribute('data-theme', resolved);
+				} catch(e) { document.documentElement.setAttribute('data-theme', 'dark');
 				}
 			})();
 		</script>
@@ -83,9 +79,9 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 		</noscript>
 
 		<!-- Additional Fonts (loaded after Inter preload) -->
-		<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Orbitron:wght@500;700&family=Satoshi:wght@400;700&display=swap" rel="stylesheet" />
 		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
 
 
 		<!-- Open Graph -->
@@ -118,5 +114,47 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 				once: true,
 			});
 		</script>
+		<script is:raw>
+			document.addEventListener("DOMContentLoaded", () => {
+				document.querySelectorAll("pre > code").forEach((codeBlock) => {
+				const button = document.createElement("button");
+				button.innerHTML = "Copy";
+				button.className = "copy-button";
+				button.type = "button";
+
+				// Optional: Add styling via class or inline styles
+				Object.assign(button.style, {
+					position: "absolute",
+					top: "0.5rem",
+					right: "0.5rem",
+					padding: "0.25rem 0.5rem",
+					background: "var(--color-primary)",
+					color: "white",
+					fontSize: "0.75rem",
+					border: "none",
+					borderRadius: "4px",
+					cursor: "pointer",
+					zIndex: 10
+				});
+
+				const pre = codeBlock.closest("pre");
+				pre.style.position = "relative";
+				pre.appendChild(button);
+
+				button.addEventListener("click", () => {
+					try {
+					navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+						button.innerText = "Copied!";
+						setTimeout(() => (button.innerText = "Copy"), 2000);
+					});
+					} catch (err) {
+					console.error("Copy failed", err);
+					button.innerText = "Error";
+					}
+				});
+				});
+			});
+		</script>
+
 	</body>
 </html>
