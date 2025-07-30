@@ -6,7 +6,7 @@ export const siteConfig = {
       Github: 'https://github.com/withastro',
       Instagram: 'https://www.instagram.com/astrodotbuild',
       LinkedIn: 'https://www.linkedin.com/company/astrodotbuild',
-      Email: 'support@titan-core.com',
+      Email: 'support@cloudnativeciso.com',
       Phone: '+123 456 7890',
       Location: '123 Main St, Anytown, USA',  // REVIEW: Update these values to your socials when you are ready
   }

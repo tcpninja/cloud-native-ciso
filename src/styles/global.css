@@ -456,69 +456,6 @@ pre {
     overflow-x: auto;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  .shiki,
-  .shiki span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-    /* Optional, if you also want font styles */
-    /* font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
-  }
-} */ */
-
-/* [data-theme='dark'] .shiki,
-[data-theme='dark'] .shiki span {
-  background-color: var(--shiki-dark-bg) !important;
-  color: var(--shiki-dark) !important;
-}
-
-[data-theme='light'] .shiki,
-[data-theme='light'] .shiki span {
-  background-color: var(--shiki-light-bg) !important;
-  color: var(--shiki-light) !important;
-} */
-/* Style code blocks with a specific language */
-/* pre[class*="language-"] {
-  background-color: var(--color-code-bg);
-  color: var(--color-code-text);
-  border: 1px solid var(--color-code-border);
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  line-height: 1.6;
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
-  overflow-x: auto;
-  white-space: pre;
-  position: relative;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-sm);
-}
-
-pre[class*="language-"] code {
-  background: none;
-  color: inherit;
-  font-size: inherit;
-  font-family: inherit;
-  padding: 0;
-}
-
-code[class*="language-"] {
-  background: none;
-  color: inherit;
-  font-family: var(--font-mono);
-} */
-
-/* :where(p, li, strong, em, b, i, u, s, a, blockquote, h1, h2, h3, h4, h5, h6)>code:not([class*="language-"]) {
-    font-size: var(--text-small);
-    background-color: var(--color-background-light);
-    color: var(--color-primary);
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-    font-weight: 400;
-} */
-
 .bg-muted-gradient {
   background: linear-gradient(
     to bottom right,
