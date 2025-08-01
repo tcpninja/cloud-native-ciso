@@ -29,3 +29,5 @@ export const playbookSetting = {
 export const themeSetting = {
   theme: 'system'
 }
+
+export const defaultOgImage = "/src/assets/images/og-default.jpg"; // adjust path as needed

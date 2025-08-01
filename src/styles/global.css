@@ -88,8 +88,6 @@
     
     --font-base: 'Inter', sans-serif;
     --font-logo: 'Satoshi', sans-serif;
-    --font-bruno-ace: 'Orbitron', sans-serif;
-    --font-noto-sans-kr: 'Noto Sans KR', sans-serif;
     --font-headline: 'DM Sans', 'Inter', sans-serif;
     --font-mono: 'Fira Code', mono-space;
 
@@ -621,4 +619,22 @@ code {
 
 .copy-button:hover {
   background-color: var(--color-primary-light);
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 1rem;
+  background: var(--color-background);
+  color: var(--color-primary);
+  padding: 0.5rem 1rem;
+  z-index: 999;
+  transition: top 0.3s ease;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.skip-link:focus {
+  top: 1rem;
 }

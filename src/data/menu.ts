@@ -1,7 +1,12 @@
 // src/data/menu.ts
 
 export const headerMenu = [
-    { name: 'Playbooks', link: '/playbook' },
+    { name: 'Playbooks', link: '/playbook' , showArrow: false,
+        children: [
+            { name: 'Lunafreya', link: '/example' },
+            { name: 'Cid', link: '/example' },
+        ]
+    },
     { name: 'Blog', link: '/blog' },
     { name: 'About', link: '/about' },
 ];

@@ -2,160 +2,101 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { SEO, siteConfig, themeSetting } from "../data/config";
+import { SEO, siteConfig, themeSetting, defaultOgImage } from "../data/config";
 import 'aos/dist/aos.css';
 
+const { title, description, image, footerCta, canonicalUrl } = Astro.props;
 const { theme } = themeSetting;
 const { SiteName, Separator, defaultDescription } = SEO;
 
-interface Props {
-	title?: string;
-	description?: string;
-	image?: string;
-	footerCta?: {
-		title: string;
-		description: string;
-		hideCta: boolean;
-		button: {
-			text: string;
-			link: string;
-			target?: string;
-		};
-	};
-	canonicalUrl?: string;
-}
-
-const { title, description, image, footerCta, canonicalUrl } = Astro.props;
-
 const pageTitle = title ? `${title} ${Separator} ${SiteName}` : SiteName;
 const pageDescription = description || defaultDescription || '';
-const pageImage = image || '';
+const pageImage = image || defaultOgImage;
 const canonicalPath = canonicalUrl || Astro.url.pathname;
 const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<script>
-			(function() {
-				try {
-				const stored = localStorage.getItem('theme') || 'system';
-				let resolved = stored;
+  <head>
+    <!-- Theme Initialization Script -->
+    <script>
+      (function() {
+        const root = document.documentElement;
+        let theme = localStorage.getItem('theme') || 'system';
+        if (theme === 'system') {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          theme = prefersDark ? 'dark' : 'light';
+        }
+        root.setAttribute('data-theme', theme);
+        root.classList.add('js');
+      })();
+    </script>
 
-				if (stored === 'system') {
-					const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-					resolved = prefersDark ? 'dark' : 'light';
-				} document.documentElement.setAttribute('data-theme', resolved);
-				} catch(e) { document.documentElement.setAttribute('data-theme', 'dark');
-				}
-			})();
-		</script>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<meta name="robots" content="index, follow" />
-		<link rel="canonical" href={fullCanonicalUrl} />
-		<meta name="generator" content={Astro.generator} />
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={fullCanonicalUrl} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:locale" content="en_US" />
 
-		<!-- Favicon & Icons -->
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="sitemap" href="/sitemap-index.xml" />
+    <!-- Favicon & Icons -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
-		<!-- Theme color for mobile status bar -->
-		<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
 
-		<!-- Font Preloading -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-		<noscript>
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-		</noscript>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&display=swap" rel="stylesheet" />
 
-		<!-- Additional Fonts (loaded after Inter preload) -->
-		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Orbitron:wght@500;700&family=Satoshi:wght@400;700&display=swap" rel="stylesheet" />
-		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:site_name" content={SiteName} />
+    <meta property="og:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />
+    <meta property="og:image:alt" content="Cloud Native CISO brand preview" />
 
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={fullCanonicalUrl} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />
+    <!-- Optional: <meta name="twitter:creator" content="@yourhandle" /> -->
+	<!-- <meta name="twitter:creator" content="@yourhandle" /> -->
+  	<!-- <meta name="twitter:site" content="@yourhandle" /> -->
+  </head>
 
-		<!-- Open Graph -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={fullCanonicalUrl} />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
-		{pageImage && <meta property="og:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
+  <body>
+    <!-- Accessibility: Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to content</a>
 
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={fullCanonicalUrl} />
-		<meta property="twitter:title" content={pageTitle} />
-		<meta property="twitter:description" content={pageDescription} />
-		{pageImage && <meta property="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
+    <Header />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer footerCta={footerCta} />
 
-	</head>
-
-	<body>
-		<Header />
-		<slot />
-		<Footer footerCta={footerCta} />
-		<!-- <ThemeSwitcher /> -->
-
-		<!-- Conditionally load AOS only on desktop -->
-		<script>
-			import AOS from 'aos';
-			AOS.init({
-				duration: 800,
-				once: true,
-			});
-		</script>
-		<script is:raw>
-			document.addEventListener("DOMContentLoaded", () => {
-				document.querySelectorAll("pre > code").forEach((codeBlock) => {
-				const button = document.createElement("button");
-				button.innerHTML = "Copy";
-				button.className = "copy-button";
-				button.type = "button";
-
-				// Optional: Add styling via class or inline styles
-				Object.assign(button.style, {
-					position: "absolute",
-					top: "0.5rem",
-					right: "0.5rem",
-					padding: "0.25rem 0.5rem",
-					background: "var(--color-secondary-dark)",
-					color: "white",
-					fontSize: "0.7rem",
-					border: "none",
-					borderRadius: "4px",
-					cursor: "pointer",
-					zIndex: 10
-				});
-
-				const pre = codeBlock.closest("pre");
-				pre.style.position = "relative";
-				pre.appendChild(button);
-
-				button.addEventListener("click", () => {
-					try {
-					navigator.clipboard.writeText(codeBlock.innerText).then(() => {
-						button.innerText = "Copied!";
-						setTimeout(() => (button.innerText = "Copy"), 2000);
-					});
-					} catch (err) {
-					console.error("Copy failed", err);
-					button.innerText = "Error";
-					}
-				});
-				});
-			});
-		</script>
-		<!-- REVIEW: Make this more aethetic and ready for prod -->
-
-	</body>
+    <!-- Scripts -->
+    <script type="module" src="/src/scripts/initAos.js"></script>
+    <script type="module" is:raw>
+      import { initCodeCopy } from '/src/scripts/copyCode.js';
+      document.addEventListener('DOMContentLoaded', initCodeCopy);
+    </script>
+  </body>
 </html>
