@@ -7,6 +7,7 @@ import type { CollectionEntry } from 'astro:content';
 import playbookHeroImage from '@assets/images/playbook-hero.jpg';
 import { tags as allTags } from '../../data/tags';
 
+
 const title = "Playbooks";
 const seoTitle = `${title}`;
 const seoDescription = "Battle-tested guides for securing cloud-native startups. Our playbooks deliver practical, actionable security strategies without enterprise bloat—built for modern builders navigating risk at startup speed.";
@@ -30,6 +31,8 @@ const {
   subtitle,
   tags
 } = Astro.props;
+
+
 
 const nextPage = currentPage < totalPages ? `${baseUrl}/${currentPage + 1}` : null;
 const prevPage = currentPage > 1

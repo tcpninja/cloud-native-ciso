@@ -1,13 +1,28 @@
 ---
+import { categories } from '../../data/categories';
+import type { Category } from '../../data/categories';
+
 interface Props {
   category: string;
 }
 
 const { category } = Astro.props;
+const categoryObj: Category | undefined = categories.find((c) => c.name === category);
+const colorVar = categoryObj?.colorVar ?? '--color-primary';
 ---
 
-<span class="text-xs sm:text-sm font-medium text-body-muted hover:text-primary transition-colors duration-200 mr-2">
-  #{category.toLowerCase().replace(/\s+/g, '')}
-</span>
-
-<!-- REVIEW: Improve the Hashtag prefix to include icons -->
+{categoryObj ? (
+  <span
+    class="px-3 py-1 text-xs sm:text-sm font-medium rounded-full border transition-all text-[var(--color-body-base)] bg-[var(--color-background-light)] border-[var(--color-border)] hover-glow-category motion-safe:hover:scale-105"
+    style={`--category-glow: var(${colorVar});`}
+    title={categoryObj.description}
+  >
+    #{categoryObj.name}
+  </span>
+) : (
+  <span
+    class="text-xs sm:text-sm font-medium text-body-muted hover:text-primary transition-colors duration-200"
+  >
+    #{category.toLowerCase().replace(/\s+/g, '')}
+  </span>
+)}

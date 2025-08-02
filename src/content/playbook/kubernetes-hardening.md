@@ -17,10 +17,7 @@ focus:
   - Runtime Security
 
 tags:
-  - open-source
-  - startup
-  - hardening
-  - cloud-native
+  - identity-access
 
 level: "Intermediate"
 

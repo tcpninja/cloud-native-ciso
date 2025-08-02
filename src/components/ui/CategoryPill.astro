@@ -1,14 +1,40 @@
 ---
+// src/components/ui/CategoryPill.astro
+import { categories } from '../../data/categories';
+import { Rocket, Cloud, AlertTriangle, Shield, FileText, Brain, KeyRound } from 'lucide-astro';
+
 interface Props {
   category: string;
 }
 
 const { category } = Astro.props;
+
+const matchedCategory = categories.find((c) => c.name === category);
+const backgroundStyle = matchedCategory ? `background-color: var(${matchedCategory.colorVar});` : '';
+const iconMap = {
+  Rocket,
+  Cloud,
+  AlertTriangle,
+  Shield,
+  FileText,
+  Brain,
+  KeyRound,
+};
+
+const categorySlug = matchedCategory?.slug ?? category.toLowerCase().replace(/\s+/g, '-');
+const Icon = matchedCategory ? iconMap[matchedCategory.icon] : null;
 ---
 
-<span
-  class="inline-block text-xs font-medium tracking-wide uppercase px-3 py-1 rounded-full 
-         bg-primary text-white hover:bg-primary-light transition-colors duration-200"
+<a
+  href={`/category/${categorySlug}`}
+  title={`View more posts in ${category}`}
+  class="inline-flex items-center gap-2 text-xs font-medium tracking-wide uppercase px-3 py-1 rounded-full text-white dark:text-black transition-all duration-300 hover-glow motion-safe:hover:scale-105"
+  style={backgroundStyle}
 >
+  {Icon && (
+    <Icon
+      class="w-4 h-4 text-white dark:text-black icon-glow"
+    />
+  )}
   {category}
-</span>
+</a>

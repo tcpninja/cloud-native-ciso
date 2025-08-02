@@ -4,7 +4,7 @@ excerpt: 'A lightweight approach to establish security baselines for startups.'
 featuredImage: './images/minimum-viable-security.jpg'
 publishDate: '2024-05-10'
 publish: true
-categories: ['Templates & Playbooks']
+categories: ['Startup Security']
 
 seo:
     title: 'Building a Minimum Viable Security Program'
