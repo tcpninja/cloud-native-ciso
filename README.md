@@ -110,8 +110,8 @@ By default, Titan Core includes a theme switcher component that allows users to 
      <Header />
      <slot />
      <Footer footerCta={footerCta} />
-     <!-- Remove this line -->W
-     <ThemeSwitcher />
+    <!-- Remove this line -->
+    <ThemeSwitcher />
      
      <script>
        import AOS from 'aos';
