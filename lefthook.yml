@@ -1,0 +1,8 @@
+pre-commit:
+    parallel: true
+    commands:
+        prettier:
+            glob: '*.{js,ts,jsx,tsx,astro,css,md}'
+            run: npx prettier --check {staged_files}
+        astro-check:
+            run: npm run check
