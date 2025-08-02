@@ -1,13 +1,10 @@
-# Titan Core - Modern Astro Theme
+# Cloud Native CISO Website
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-**Titan Core** is a high-performance, feature-rich theme for Astro JS, designed for modern websites, blogs, and portfolios. With beautiful UI components, multiple theme options, and a focus on performance, Titan Core helps you build stunning websites quickly.
-
-[Live Demo](https://titan-core.netlify.app)
+The **Cloud Native CISO** project is the official website for the Cloud Native CISO initiative. It is built with [Astro](https://astro.build) and deployed on [Cloudflare Pages](https://pages.cloudflare.com), providing fast and accessible pages for the community.
 
 ## ✨ Features
 
-- 🎨 **Multiple Theme Options** - Choose from various color themes
 - 📱 **Fully Responsive** - Looks great on all devices
 - 🚀 **Performance Focused** - Optimized for speed and SEO
 - 📝 **Blog Ready** - Complete blog functionality with categories and pagination
@@ -22,18 +19,30 @@
 - 🏢 **Logo Showcase** - Display partner or client logos
 - 🔘 **Modern UI Components** - Buttons, forms, cards, and more
 
-## 🚀 Quick Start
+## Getting Started
+
+Clone the repository and install dependencies:
 
 ```bash
-# Create a new project with this theme
-npm create astro@latest -- --template rspisarski/titan-core
-
-# or clone this repository
-git clone https://github.com/rspisarski/titan-core.git my-website
-cd my-website
+git clone https://github.com/rspisarski/cloud-native-ciso.git
+cd cloud-native-ciso
 npm install
-npm run dev
 ```
+
+## Running the Project
+
+Use the following npm scripts:
+
+```bash
+npm run dev     # Start local dev server at localhost:4321
+npm run build   # Build the production site to ./dist/
+npm run preview # Preview the production build locally
+npm run check   # Run Astro's type and config checks
+```
+
+## Deployment
+
+This site uses Astro's static build output and is deployed on Cloudflare Pages. Pushing to the main branch triggers a Pages build. To preview locally before deployment, run `npm run build` followed by `npm run preview`.
 
 ## 📁 Project Structure
 
@@ -71,67 +80,13 @@ Customize your site by editing the configuration files in the `src/data/` direct
 - `stats.ts` - Statistics display data
 - `categories.ts` - Blog categories
 
-## 🎨 Theming
-
-Titan Core comes with 10 beautiful pre-configured themes inspired by Greek mythology. Developers can choose a single theme for their site by editing the `themeSetting` object in `src/data/config.ts`:
-
-```typescript
-export const themeSetting = {
-  theme: 'zeus' // Choose one of the 10 available themes
-}
-```
-
-### Available Themes:
-
-1. `zeus` - Sky & Thunder theme
-2. `poseidon` - Ocean & Seas theme
-3. `hades` - Underworld theme
-4. `apollo` - Sun & Light theme
-5. `artemis` - Moon & Hunt theme
-6. `ares` - War & Fire theme
-7. `athena` - Wisdom theme
-8. `hermes` - Speed theme
-9. `dionysus` - Festivity theme
-10. `demeter` - Nature theme
-
-### Removing the Theme Switcher
-
-By default, Titan Core includes a theme switcher component that allows users to change themes. For projects where you want to use a single consistent theme, you can remove the theme switcher by:
-
-1. Open `src/layouts/Layout.astro`
-2. Remove or comment out the ThemeSwitcher import:
-   ```astro
-   // Remove this line
-   import ThemeSwitcher from "../components/ThemeSwitcher.astro";
-   ```
-3. Remove the ThemeSwitcher component from the body:
-   ```astro
-   <body data-theme={theme}>
-     <Header />
-     <slot />
-     <Footer footerCta={footerCta} />
-     <!-- Remove this line -->W
-     <ThemeSwitcher />
-     
-     <script>
-       import AOS from 'aos';
-       AOS.init({
-         duration: 800,
-         once: true,
-       });
-     </script>
-   </body>
-   ```
-
-This will ensure your site uses only the theme specified in your configuration.
-
 ## 📝 Content Management
 
-Titan Core uses Astro's content collections for blog posts and other content. Add your content to the `src/content/` directory.
+This project uses Astro's content collections for blog posts and other content. Add your content to the `src/content/` directory.
 
 ## 🧩 Components
 
-Titan Core includes a wide range of components:
+The site includes a wide range of components:
 
 - **Layout Components**: Hero, Features, Split Panel, CTA Banner, etc.
 - **UI Components**: Buttons, Forms, Cards, etc.
@@ -144,9 +99,10 @@ Titan Core includes a wide range of components:
 | :--------------------- | :----------------------------------------------- |
 | `npm install`          | Install dependencies                            |
 | `npm run dev`          | Start local dev server at `localhost:4321`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
+| `npm run build`        | Build your production site to `./dist/`         |
+| `npm run preview`      | Preview your build locally before deploying     |
+| `npm run check`        | Run Astro's type and config checks              |
+| `npm run astro ...`    | Run other Astro CLI commands                    |
 
 ## 📄 License
 
