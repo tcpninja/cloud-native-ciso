@@ -36,7 +36,7 @@ const inputTextClass = getInputTextColor(background);
         class={`block text-sm font-medium mb-1 ${labelClass}`}
     >
         {label}
-        {required && <span class="text-red-500">*</span>}
+        {required && <span class="text-red-500" aria-hidden="true">*</span>}
     </label>
     <input 
         type={type}
