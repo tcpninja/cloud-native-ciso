@@ -11,89 +11,95 @@ const seoTitle = "Blog";
 const seoDescription = "Our blog is where we share our thoughts and ideas about the latest trends in the web development industry.";
 
 interface Props {
-    posts: any[];
-    currentPage: number;
-    totalPages: number;
-    baseUrl: string;
-    title: string;
-    subtitle: string;
-    currentCategory?: string;
+  posts: any[];
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+  title: string;
+  subtitle: string;
+  currentCategory?: string;
 }
 
 const {
-    posts: paginatedPosts,
-    currentPage,
-    totalPages,
-    baseUrl,
-    title,
-    subtitle,
-    currentCategory
+  posts: paginatedPosts,
+  currentPage,
+  totalPages,
+  baseUrl,
+  title,
+  subtitle,
+  currentCategory
 } = Astro.props;
 
 const nextPage = currentPage < totalPages ? `${baseUrl}/${currentPage + 1}` : null;
 const prevPage = currentPage > 1
-    ? currentPage - 1 === 1
-        ? baseUrl
-        : `${baseUrl}/${currentPage - 1}`
-    : null;
+  ? currentPage - 1 === 1
+    ? baseUrl
+    : `${baseUrl}/${currentPage - 1}`
+  : null;
 
 const heroContent = {
-    title,
-    description: subtitle,
-    backgroundImage: blogHeroImage,
-    overlayOpacity: 0.2
+  title,
+  description: subtitle,
+  backgroundImage: blogHeroImage,
+  overlayOpacity: 0.2
 };
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-    <main>
-        <InnerHero content={heroContent} />
-        <BlogList posts={paginatedPosts} currentCategory={currentCategory} />
+  <main>
+    <InnerHero content={heroContent} />
+    <BlogList posts={paginatedPosts} currentCategory={currentCategory} />
 
-        {totalPages > 1 && (
-            <nav class="pagination-nav" aria-label="Blog pagination" data-aos="fade-in">
-                <div class="container mx-auto px-4 py-16">
-                    <div class="flex items-center justify-center flex-wrap gap-6 text-sm text-[var(--color-body)] bg-[var(--color-surface-1)] border-t border-[var(--color-border)] pt-8 mt-8 rounded-lg">
-                        {prevPage && (
-                            <Button
-                                href={prevPage}
-                                variant="ghost"
-                                class="flex items-center gap-2 text-sm px-4 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-surface-2)] motion-safe:transition-transform motion-safe:hover:scale-105"
-                            >
-                                <ChevronLeft size={18} />
-                                Previous
-                            </Button>
-                        )}
+    {totalPages > 1 && (
+      <nav
+        class="pagination-nav"
+        aria-label="Blog pagination"
+        data-aos="fade-in"
+      >
+        <div class="site-container py-16">
+          <div class="flex items-center justify-center flex-wrap gap-6 text-sm bg-[var(--color-surface)] border-t border-[var(--color-border)] pt-8 mt-8 rounded-lg shadow-sm">
+            
+            {prevPage && (
+              <Button
+                href={prevPage}
+                variant="ghost"
+                class="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border)] text-[var(--color-body-base)] hover:bg-[var(--color-surface-2)] motion-safe:transition-all motion-safe:hover:scale-105 motion-safe:hover:text-[var(--color-primary)]"
+              >
+                <ChevronLeft size={18} />
+                Previous
+              </Button>
+            )}
 
-                        <div class="flex items-center gap-2">
-                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                                <a
-                                    href={`${baseUrl}/${pageNum === 1 ? '' : pageNum}`}
-                                    class={`w-9 h-9 flex items-center justify-center rounded-full border text-sm transition-all duration-200 motion-safe:hover:scale-105 ${
-                                        currentPage === pageNum
-                                            ? 'bg-primary text-white dark:text-black font-semibold'
-                                            : 'border-[var(--color-border)] text-[var(--color-muted)] dark:text-[var(--color-body)] hover:bg-[var(--color-surface-2)]'
-                                    }`}
-                                    aria-current={currentPage === pageNum ? 'page' : undefined}
-                                >
-                                    {pageNum}
-                                </a>
-                            ))}
-                        </div>
+            <div class="flex items-center gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <a
+                  href={`${baseUrl}/${pageNum === 1 ? '' : pageNum}`}
+                  class:list={[
+                    'w-9 h-9 flex items-center justify-center rounded-full border text-sm font-medium transition-all motion-safe:hover:scale-105 motion-safe:hover:shadow-elevated motion-safe:hover:border-[var(--color-primary)]',
+                    currentPage === pageNum
+                      ? 'bg-primary text-white dark:text-black'
+                      : 'border-[var(--color-border)] text-[var(--color-body-base)] hover:bg-[var(--color-surface-2)]'
+                  ]}
+                  aria-current={currentPage === pageNum ? 'page' : undefined}
+                >
+                  {pageNum}
+                </a>
+              ))}
+            </div>
 
-                        {nextPage && (
-                            <Button
-                                href={nextPage}
-                                variant="ghost"
-                                class="flex items-center gap-2 text-sm px-4 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-surface-2)] motion-safe:transition-transform motion-safe:hover:scale-105"
-                            >
-                                Next
-                                <ChevronRight size={18} />
-                            </Button>
-                        )}
-                    </div>
-                </div>
-            </nav>
-        )}
-    </main>
+            {nextPage && (
+              <Button
+                href={nextPage}
+                variant="ghost"
+                class="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border)] text-[var(--color-body-base)] hover:bg-[var(--color-surface-2)] motion-safe:transition-all motion-safe:hover:scale-105 motion-safe:hover:text-[var(--color-primary)]"
+              >
+                Next
+                <ChevronRight size={18} />
+              </Button>
+            )}
+          </div>
+        </div>
+      </nav>
+    )}
+  </main>
 </Layout>

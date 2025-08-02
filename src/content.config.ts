@@ -7,6 +7,7 @@ import { tags } from '@data/tags';
 const categoryNames = categories.map((category) => category.name);
 // Extract tag names from the enum
 const tagNames = tags.map((tags) => tags.name);
+const tagSlugs = tags.map((tag) => tag.slug);
 
 const blog = defineCollection({
     loader: glob({ base: './src/content/blog', pattern: '**/*.md' }),
@@ -49,7 +50,7 @@ const playbook = defineCollection({
         // Optional categorization and metadata
         audience: z.enum(['founder', 'developer', 'product-manager', 'security-lead']).optional(),
         focus: z.array(z.string()).optional(),
-        tags: z.array(z.string()).optional(),
+        tags: z.array(z.enum(tagSlugs as [string, ...string[]])).optional(),
         categories: z.array(z.string()).optional(),
         level: z.enum(['Beginner', 'Intermediate', 'Advanced']).optional(),
 

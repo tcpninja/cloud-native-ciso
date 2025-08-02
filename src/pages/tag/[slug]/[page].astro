@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import { tags } from '../../../data/tags';
+import { getTagBySlug } from '../../../data/tags';
+import { getTagPlaybooks } from '../../../utils/getTagPlaybooks';
+import PaginatedPlaybookLayout from '../../../components/playbook/PaginatedPlaybookLayout.astro';
+
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const tag of tags) {
+    const { totalPages } = await getTagPlaybooks(tag);
+
+    for (let page = 2; page <= totalPages; page++) {
+      paths.push({
+        params: { slug: tag.slug, page: String(page) },
+        props: { tag, page },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { tag, page } = Astro.props;
+const pageNum = Number(page);
+
+// Redirect page 1 to clean URL
+if (pageNum === 1) {
+  return Astro.redirect(`/tag/${tag.slug}`);
+}
+
+const { playbooks, totalPages } = await getTagPlaybooks(tag, pageNum);
+---
+
+<PaginatedPlaybookLayout
+  playbook={playbooks}
+  currentPage={pageNum}
+  totalPages={totalPages}
+  baseUrl={`/tag/${tag.slug}`}
+  title={tag.name}
+  subtitle={tag.description}
+/>

@@ -6,6 +6,7 @@ slug: "compliance-checklist"
 publishDate: "2025-1-15"
 publish: true
 link: "/playbook/compliance-checklist"
+tags: ["cloud-native-security", "incident-readiness"]
 # image:
 #   src: "https://via.placeholder.com/300x400.png?text=Compliance+Checklist"
 #   width: 300

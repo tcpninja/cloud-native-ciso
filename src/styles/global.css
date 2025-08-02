@@ -390,6 +390,7 @@
     .py-large { padding-top: var(--spacing-large); padding-bottom: var(--spacing-large); }
     
     .cursor-pointer { cursor: pointer; }
+    .hover-glow:hover { box-shadow: 0 0 0 2px var(--color-primary), 0 0 10px var(--color-primary-dark);}
 }
 
 html,
@@ -638,3 +639,4 @@ code {
 .skip-link:focus {
   top: 1rem;
 }
+

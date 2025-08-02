@@ -7,6 +7,8 @@ publishDate: "2024-11-01"
 # image: "/assets/images/playbooks/k8s-security.jpg"
 publish: true
 link: "/playbook/kubernetes-security-basics"
+tags: ["cloud-native-security", "incident-readiness"]
+
 ---
 
 ```python

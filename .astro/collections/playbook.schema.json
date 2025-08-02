@@ -51,7 +51,16 @@
         "tags": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "startup-security",
+              "cloud-native-security",
+              "incident-readiness",
+              "threat-modeling",
+              "templates-playbooks",
+              "identity-access",
+              "ai-llm-security"
+            ]
           }
         },
         "categories": {

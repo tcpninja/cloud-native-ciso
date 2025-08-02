@@ -1,10 +1,10 @@
-interface Tags {
+export interface Tag {
   name: string;
   slug: string;
   description: string;
 }
 
-export const tags: Tags[] = [
+export const tags: Tag[] = [
   {
     name: 'Startup Security',
     slug: 'startup-security',
@@ -43,7 +43,7 @@ export const tags: Tags[] = [
 ];
 
 // Helper function to get category by slug
-export function getTagBySlug(slug: string): Tags | undefined {
+export function getTagBySlug(slug: string): Tag | undefined {
   return tags.find(tag => tag.slug === slug);
 }
 

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import PaginatedBlogLayout from '../../../components/blog/PaginatedBlogLayout.astro';
 import { categories } from '../../../data/categories';
 import { blogSetting } from '../../../data/config';
+import { getCategoryPosts } from '../../../utils/getCategoryPosts';
 
 export async function getStaticPaths() {
     // Get all blog posts

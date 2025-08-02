@@ -1,12 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import InnerHero from '../sections/InnerHero.astro';
-import PlaybookList from './PlaybookList.astro';
-import Button from '../ui/Button.astro';
 import { ChevronLeft, ChevronRight } from 'lucide-astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import playbookHeroImage from '@assets/images/playbook-hero.jpg';
+import { tags as allTags } from '../../data/tags';
 
 const title = "Playbooks";
 const seoTitle = `${title}`;
@@ -50,16 +49,56 @@ const heroContent = {
 <Layout title={seoTitle} description={seoDescription}>
   <main>
     <InnerHero content={heroContent} />
-    <section class="site-container px-4 py-16">
+
+    <section class="site-container mx-auto px-4 py-base text-[var(--color-body)]">
+      <div
+        class="mb-16 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-8"
+        data-aos="fade-in"
+        data-aos-delay="100"
+      >
+        <div class="w-full">
+          <h4 class="text-xl font-semibold tracking-tight text-[var(--color-headline)] mb-4">
+            Filter by tag:
+          </h4>
+      <!-- TAG FILTERS -->
+      <div class="mb-8 flex flex-wrap gap-3" data-aos="fade-in">
+        <a
+          href="/playbook"
+          class:list={[
+            'px-4 py-2 text-sm rounded-full border transition-all motion-safe:hover:scale-105 motion-safe:hover:shadow-elevated hover-glow motion-safe:hover:border-[var(--color-primary)] motion-safe:hover:text-[var(--color-primary)]',
+            !tags
+              ? 'bg-primary text-white dark:text-black font-semibold'
+              : 'border-[var(--color-border)] text-[var(--color-body-base)] hover:bg-[var(--color-surface-2)]'
+          ]}
+        >
+          All
+        </a>
+
+        {allTags.map((tagItem) => (
+          <a
+            href={`/tag/${tagItem.slug}`}
+            class:list={[
+              'px-4 py-2 text-sm rounded-full border transition-all motion-safe:hover:scale-105 motion-safe:hover:shadow-elevated hover-glow motion-safe:hover:border-[var(--color-primary)] motion-safe:hover:text-[var(--color-primary)]',
+              tagItem.slug === tags
+                ? 'bg-primary text-white dark:text-black font-semibold'
+                : 'border-[var(--color-border)] text-[var(--color-body-base)] hover:bg-[var(--color-surface-2)]'
+            ]}
+          >
+            {tagItem.name}
+          </a>
+        ))}
+      </div>
+
+      <!-- PLAYBOOK LIST -->
       {playbook.length === 0 ? (
-        <p class="text-[var(--color-body-muted)]">No playbooks found.</p>
+        <p class="text-center text-[var(--color-body-light)] py-8 italic">No playbooks found.</p>
       ) : (
         <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" data-aos="fade-up">
           {playbook.map((playbook) => (
-            <li class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md transition-all duration-300 motion-safe:hover:shadow-xl">
+            <li class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md transition-all duration-300 motion-safe:hover:shadow-elevated motion-safe:hover:border-[var(--color-primary)] motion-safe:hover:scale-[1.015]">
               <a href={`/playbook/${playbook.data.slug || playbook.id}`} class="group block h-full overflow-hidden">
                 {playbook.data.image ? (
-                  <div class="relative aspect-[16/9] overflow-hidden border-b border-[var(--color-border)] transition-colors duration-300 group-hover:border-primary">
+                  <div class="relative aspect-[16/9] overflow-hidden border-b border-[var(--color-border)] transition-all duration-300 group-hover:border-[var(--color-primary)]">
                     <Image
                       src={playbook.data.image}
                       alt={`Cover for ${playbook.data.title}`}
@@ -67,19 +106,19 @@ const heroContent = {
                       height={338}
                       class="object-cover w-full h-full grayscale transition-all duration-300 motion-safe:group-hover:grayscale-0 motion-safe:group-hover:scale-105"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-background-dark)] via-transparent to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none z-10"></div>
                   </div>
                 ) : (
                   <div class="bg-[var(--color-surface-2)] rounded-md h-48 flex items-center justify-center mb-4">
-                    <span class="text-[var(--color-body-muted)] text-sm">No Image</span>
+                    <span class="text-[var(--color-body-light)] text-sm">No Image</span>
                   </div>
                 )}
 
                 <div class="p-5 flex flex-col flex-grow">
-                  <h2 class="text-lg font-semibold text-[var(--color-headline)] mb-2 transition-colors group-hover:text-primary">
+                  <h2 class="text-lg font-semibold text-[var(--color-headline)] mb-2 transition-all duration-300 group-hover:text-[var(--color-primary)] group-hover:drop-shadow-md">
                     {playbook.data.title}
                   </h2>
-                  <p class="text-sm text-[var(--color-body-light)] leading-relaxed line-clamp-4">
+                  <p class="text-sm text-[var(--color-body-base)] leading-relaxed line-clamp-4">
                     {playbook.data.description}
                   </p>
                 </div>
@@ -88,52 +127,49 @@ const heroContent = {
           ))}
         </ul>
       )}
-    </section>
 
-    {totalPages > 1 && (
-      <nav class="pagination-nav" aria-label="Playbook pagination" data-aos="fade-in">
-        <div class="container mx-auto px-4 py-16">
-          <div class="flex items-center justify-center flex-wrap gap-6 text-sm text-[var(--color-body)] bg-[var(--color-surface-1)] border-t border-[var(--color-border)] pt-8 mt-8 rounded-lg">
-            {prevPage && (
-              <Button
-                href={prevPage}
-                variant="ghost"
-                class="flex items-center gap-2 text-sm px-4 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-surface-2)] motion-safe:transition-transform motion-safe:hover:scale-105"
-              >
-                <ChevronLeft size={18} />
-                Previous
-              </Button>
-            )}
+      <!-- PAGINATION -->
+      {totalPages > 1 && (
+        <nav class="pagination-nav" aria-label="Pagination for playbooks" data-aos="fade-in">
+          <div class="site-container pt-16">
+            <div class="flex items-center justify-center gap-4 flex-wrap">
 
-            <div class="flex items-center gap-2">
+              {prevPage && (
+                <a
+                  href={prevPage}
+                  class="px-4 py-2 text-sm rounded-full border border-[var(--color-border)] text-[var(--color-body-base)] transition-all motion-safe:hover:scale-105 hover-glow hover:bg-[var(--color-surface-2)]"
+                >
+                  ← Previous
+                </a>
+              )}
+
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
                 <a
                   href={`${baseUrl}/${pageNum === 1 ? '' : pageNum}`}
-                  class={`w-9 h-9 flex items-center justify-center rounded-full border text-sm transition-all duration-200 motion-safe:hover:scale-105 ${
-                    currentPage === pageNum
+                  class:list={[
+                    'w-9 h-9 flex items-center justify-center text-sm rounded-full border transition-all motion-safe:hover:scale-105 hover-glow',
+                    pageNum === currentPage
                       ? 'bg-primary text-white dark:text-black font-semibold'
-                      : 'border-[var(--color-border)] text-[var(--color-muted)] dark:text-[var(--color-body)] hover:bg-[var(--color-surface-2)]'
-                  }`}
-                  aria-current={currentPage === pageNum ? 'page' : undefined}
+                      : 'border-[var(--color-border)] text-[var(--color-body-base)] hover:bg-[var(--color-surface-2)]'
+                  ]}
+                  aria-current={pageNum === currentPage ? 'page' : undefined}
                 >
                   {pageNum}
                 </a>
               ))}
-            </div>
 
-            {nextPage && (
-              <Button
-                href={nextPage}
-                variant="ghost"
-                class="flex items-center gap-2 text-sm px-4 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-surface-2)] motion-safe:transition-transform motion-safe:hover:scale-105"
-              >
-                Next
-                <ChevronRight size={18} />
-              </Button>
-            )}
+              {nextPage && (
+                <a
+                  href={nextPage}
+                  class="px-4 py-2 text-sm rounded-full border border-[var(--color-border)] text-[var(--color-body-base)] transition-all motion-safe:hover:scale-105 hover-glow hover:bg-[var(--color-surface-2)]"
+                >
+                  Next →
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-      </nav>
-    )}
+        </nav>
+      )}
+    </section>
   </main>
 </Layout>
